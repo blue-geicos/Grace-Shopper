@@ -14,18 +14,21 @@ async function seed() {
       firstName: 'Audra',
       lastName: 'Kenney',
       email: 'audrakkenney@gmail.com',
+      password: 'happy',
       address: '123 Main St'
     }),
     User.create({
       firstName: 'Taylor',
       lastName: 'Thompson',
       email: 'taylorthompson@gmail.com',
+      password: 'icecream',
       address: '246 Main St'
     }),
     User.create({
       firstName: 'Colleen',
       lastName: 'Higgins',
       email: 'colleenHiggins@gmail.com',
+      password: 'sunshine',
       address: '5666 Main St'
     })
   ])
