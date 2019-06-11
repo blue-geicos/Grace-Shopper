@@ -10,3 +10,12 @@ router.get('/all', async (req, res, next) => {
     next(err)
   }
 })
+
+router.get('/:id', async (req, res, next) => {
+  try {
+    const item = await Item.findById(req.body.id)
+    res.json(item)
+  } catch (err) {
+    next(err)
+  }
+})
