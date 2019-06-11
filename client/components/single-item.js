@@ -19,7 +19,7 @@ class SingleItem extends Component {
         <img src={item.imageUrl} />
         <h4>{item.price}</h4>
         <p>{item.description}</p>
-        <button>Add To Cart</button>
+        <button type="button">Add To Cart</button>
       </div>
     )
   }
