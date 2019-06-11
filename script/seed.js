@@ -39,7 +39,8 @@ async function seed() {
       description: 'Really Yummy',
       price: 45.99,
       category: 'Special Occasions',
-      imageUrl: 'imageUrl.jpeg',
+      imageUrl:
+        ' https://www.gifttree.com/images/super/27910a_Good-Times-Candy-Tower.jpg',
       stock: 10
     }),
     Item.create({
@@ -47,7 +48,8 @@ async function seed() {
       description: 'Feel better soon',
       price: 62.0,
       category: 'Get Well',
-      imageUrl: 'imageUrl.jpeg',
+      imageUrl:
+        'https://www.gifttree.com/images/super/6774j_Get-Well-Medicine-Cabinet.jpg',
       stock: 10
     }),
     Item.create({
@@ -55,7 +57,8 @@ async function seed() {
       description: 'Congratulations!',
       price: 79.99,
       category: 'Congrats',
-      imageUrl: 'imageUrl.jpeg',
+      imageUrl:
+        'https://www.gifttree.com/images/super/5061bg_Champagne-Wishes-Gift-Basket.jpg',
       stock: 5
     })
   ])

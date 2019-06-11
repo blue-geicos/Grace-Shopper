@@ -2,7 +2,7 @@ import axios from 'axios'
 
 // initial state
 const initialState = {
-  items: []
+  all: []
 }
 
 // action
@@ -36,7 +36,7 @@ export const fetchItems = () => async dispatch => {
 export default function(state = initialState, action) {
   switch (action.type) {
     case GOT_ITEMS:
-      return {...state, items: action.items}
+      return {...state, all: action.items}
     default:
       return state
   }
