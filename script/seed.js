@@ -37,7 +37,7 @@ async function seed() {
     Item.create({
       name: 'Candy Basket',
       description: 'Really Yummy',
-      price: 45.99,
+      price: 4599,
       category: 'Special Occasions',
       imageUrl:
         ' https://www.gifttree.com/images/super/27910a_Good-Times-Candy-Tower.jpg',
@@ -46,7 +46,7 @@ async function seed() {
     Item.create({
       name: 'Get Well Basket',
       description: 'Feel better soon',
-      price: 62.0,
+      price: 6200,
       category: 'Get Well',
       imageUrl:
         'https://www.gifttree.com/images/super/6774j_Get-Well-Medicine-Cabinet.jpg',
@@ -55,7 +55,7 @@ async function seed() {
     Item.create({
       name: 'Congrats',
       description: 'Congratulations!',
-      price: 79.99,
+      price: 7999,
       category: 'Congrats',
       imageUrl:
         'https://www.gifttree.com/images/super/5061bg_Champagne-Wishes-Gift-Basket.jpg',
