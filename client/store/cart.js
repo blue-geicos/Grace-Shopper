@@ -50,7 +50,9 @@ export const deleteCartItem = id => dispatch => {
 export default function(state = initialState, action) {
   switch (action.type) {
     case ADD_CART_ITEM:
-      return {...state, cart: [...state.cart, action.item]}
+      const cartItems =
+        state.cart.length === 0 ? [action.item] : [...state.cart, action.item]
+      return {...state, cart: cartItems}
     case REMOVE_CART_ITEM:
       const itemsToKeep = state.cart.filter(item => item.id !== action.id)
       return {...state, cart: itemsToKeep}

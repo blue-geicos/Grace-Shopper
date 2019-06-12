@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {fetchSingleItem} from '../store/items'
+import {addCartItem} from '../store/cart'
 
 class SingleItem extends Component {
   constructor() {
@@ -19,7 +20,9 @@ class SingleItem extends Component {
         <img src={item.imageUrl} />
         <h4>{item.price}</h4>
         <p>{item.description}</p>
-        <button type="button">Add To Cart</button>
+        <button type="button" onClick={() => this.props.addItem(item.id)}>
+          Add To Cart
+        </button>
       </div>
     )
   }
@@ -30,7 +33,8 @@ const mapState = state => {
 }
 const mapDispatch = dispatch => {
   return {
-    getSingleItem: id => dispatch(fetchSingleItem(id))
+    getSingleItem: id => dispatch(fetchSingleItem(id)),
+    addItem: id => dispatch(addCartItem(id))
   }
 }
 
