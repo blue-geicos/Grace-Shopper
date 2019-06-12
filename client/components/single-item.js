@@ -18,7 +18,7 @@ class SingleItem extends Component {
       <div>
         <h1>{item.name}</h1>
         <img src={item.imageUrl} />
-        <h4>{item.price}</h4>
+        <h4>${item.price}</h4>
         <p>{item.description}</p>
         <button type="button" onClick={() => this.props.addItem(item.id)}>
           Add To Cart
