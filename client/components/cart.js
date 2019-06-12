@@ -16,7 +16,7 @@ class Cart extends Component {
             <div key={item.id}>
               <h1>{item.name}</h1>
               <img src={item.imageUrl} />
-              <h4>{item.price}</h4>
+              <h4>${item.price / 100}</h4>
               <p>{item.description}</p>
               <button
                 type="button"

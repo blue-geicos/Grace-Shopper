@@ -12,7 +12,7 @@ export const AllItems = props => {
           <Link to={`/items/${item.id}`}>
             <img src={item.imageUrl} />
             <h1>{item.name}</h1>
-            <h4>${item.price}</h4>
+            <h4>${item.price / 100}</h4>
           </Link>
         </div>
       ))}

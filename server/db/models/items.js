@@ -10,7 +10,7 @@ const Item = db.define('items', {
     type: Sequelize.TEXT
   },
   price: {
-    type: Sequelize.FLOAT
+    type: Sequelize.INTEGER
   },
   category: {
     type: Sequelize.STRING,
@@ -24,7 +24,10 @@ const Item = db.define('items', {
       'https://images-na.ssl-images-amazon.com/images/I/910UGd0ppFL._SY450_.jpg'
   },
   stock: {
-    type: Sequelize.INTEGER
+    type: Sequelize.INTEGER,
+    validate: {
+      [Sequelize.Op.gt]: 0
+    }
   }
 })
 
