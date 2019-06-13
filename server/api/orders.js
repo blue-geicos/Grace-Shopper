@@ -32,19 +32,32 @@ router.put('/add-to-cart', async (req, res, next) => {
     })
     const orderItemsObject = await order[0].getItems()
 
-    res.json(orderItemsObject)
-
-    console.log(req.body.itemId)
-
-    orderItemsObject.forEach(item => {
-      console.log(typeof item.id)
-
+    let inCart = false
+    orderItemsObject.forEach(async item => {
       if (item.id === Number(req.body.itemId)) {
-        console.log('BINGO', req.body.itemId)
-      } else {
-        console.log('NOOO', req.body.itemId)
+        inCart = true
+        const itemToUpdate = await OrderItems.findOne({
+          where: {
+            itemId: item.id,
+            orderId: order[0].id
+          }
+        })
+        const newQuantity = itemToUpdate.quantity + 1
+        const itemUpdated = await itemToUpdate.update(
+          {
+            quantity: newQuantity
+          },
+          {returning: true}
+        )
       }
     })
+
+    if (!inCart) {
+      const itemToAdd = Item.findByPk(req.body.itemId)
+      order[0].addItem(itemToAdd)
+    }
+
+    res.json(order[0])
 
     // if (order.items.includes(req.body.item)) {
     //   OrderItems.update({
