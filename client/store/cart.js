@@ -3,7 +3,8 @@ import axios from 'axios'
 
 // initial state
 const initialState = {
-  cart: []
+  cart: [],
+  cartId: undefined
 }
 
 //Action
@@ -12,6 +13,7 @@ const REMOVE_CART_ITEM = 'REMOVE_CART_ITEM'
 const ADD_QUANTITY = 'ADD_QUANTITY'
 const REMOVE_QUANTITY = 'REMOVE_QUANTITY'
 const CHECKOUT = 'CHECKOUT'
+const CREATE_CART_ID = 'CREATE_CART_ID'
 
 //Action Creator
 
@@ -42,11 +44,22 @@ const checkout = () => {
   }
 }
 
+const createCartId = cartId => {
+  return {
+    type: CREATE_CART_ID,
+    cartId
+  }
+}
+
 // Thunk Creator
 
-export const addCartItem = id => async dispatch => {
+export const addCartItem = (itemId, userId, orderId) => async dispatch => {
   try {
-    const {data} = await axios.get(`/api/items/${id}`)
+    const {data} = await axios.get(`/api/items/${itemId}`)
+    const body = {userId, itemId, orderId}
+    const res = await axios.put('/api/orders/add-to-cart', body)
+    const cartId = res.data.id
+    dispatch(createCartId(cartId))
     if (data) {
       dispatch(addItem(data))
     } else {
@@ -73,10 +86,20 @@ export const deleteCartItem = id => dispatch => {
   }
 }
 
-export const checkoutCart = cart => async dispatch => {
+export const guestCheckout = cart => async dispatch => {
   try {
     await axios.post('/api/orders/guest-checkout', cart)
-    // dispatch(checkout())
+    dispatch(checkout())
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export const userCheckout = orderId => async dispatch => {
+  console.log('order id', orderId)
+  try {
+    await axios.put('/api/orders/checkout', {orderId})
+    dispatch(checkout())
   } catch (err) {
     console.error(err)
   }
@@ -104,6 +127,10 @@ export default function(state = initialState, action) {
     case REMOVE_CART_ITEM:
       const itemsToKeep = state.cart.filter(item => item.id !== action.id)
       return {...state, cart: itemsToKeep}
+    case CHECKOUT:
+      return {...state, cart: [], cartId: undefined}
+    case CREATE_CART_ID:
+      return {...state, cartId: action.cartId}
     // case ADD_QUANTITY:
     //   let addedItem = state.cart.find(item=> item.id === action.id)
     //   if (!addedItem) {

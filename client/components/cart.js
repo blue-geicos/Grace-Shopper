@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {deleteCartItem, checkoutCart} from '../store/cart'
+import {deleteCartItem, guestCheckout, userCheckout} from '../store/cart'
 
 class Cart extends Component {
   constructor() {
@@ -8,6 +8,7 @@ class Cart extends Component {
   }
   render() {
     const cart = this.props.cart
+    const cartId = this.props.cartId
     return (
       <div>
         <h1>My Cart</h1>
@@ -28,21 +29,31 @@ class Cart extends Component {
             </div>
           )
         })}
-        <button type="button" onClick={() => this.props.checkout(cart)}>
-          Checkout
-        </button>
+
+        {this.props.isLoggedIn ? (
+          <button type="button" onClick={() => this.props.userCheckout(cartId)}>
+            Checkout
+          </button>
+        ) : (
+          <button type="button" onClick={() => this.props.guestCheckout(cart)}>
+            Checkout
+          </button>
+        )}
       </div>
     )
   }
 }
 
 const mapState = state => ({
-  cart: state.cart.cart
+  cart: state.cart.cart,
+  cartId: state.cart.cartId,
+  isLoggedIn: !!state.user.id
 })
 
 const mapDispatch = dispatch => ({
   deleteItem: id => dispatch(deleteCartItem(id)),
-  checkout: cart => dispatch(checkoutCart(cart))
+  guestCheckout: cart => dispatch(guestCheckout(cart)),
+  userCheckout: cartId => dispatch(userCheckout(cartId))
 })
 
 export default connect(mapState, mapDispatch)(Cart)
