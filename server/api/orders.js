@@ -5,7 +5,8 @@ module.exports = router
 
 router.put('/checkout', async (req, res, next) => {
   try {
-    const placedOrder = await Order.update(
+    const orderToUpdate = await Order.findByPk(req.body.id)
+    const placedOrder = await orderToUpdate.update(
       {
         cartMode: false
       },
@@ -18,6 +19,29 @@ router.put('/checkout', async (req, res, next) => {
     res.json(placedOrder[1])
   } catch (err) {
     next(err)
+  }
+})
+
+router.post('/guest-checkout', async (req, res, next) => {
+  try {
+    const guestOrder = await Order.create({
+      cartMode: false
+    })
+    req.body.map(async cartItem => {
+      const itemInfo = await Item.findByPk(cartItem.id)
+      await guestOrder.addItem(itemInfo)
+      const orderItemToUpdate = await OrderItems.findOne({
+        where: {
+          itemId: cartItem.id,
+          orderId: guestOrder.id
+        }
+      })
+      await orderItemToUpdate.update({
+        quantity: cartItem.quantity
+      })
+    })
+  } catch (err) {
+    console.error(err)
   }
 })
 

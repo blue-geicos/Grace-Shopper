@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {deleteCartItem} from '../store/cart'
+import {deleteCartItem, checkoutCart} from '../store/cart'
 
 class Cart extends Component {
   constructor() {
@@ -16,7 +16,8 @@ class Cart extends Component {
             <div key={item.id}>
               <h1>{item.name}</h1>
               <img src={item.imageUrl} />
-              <h4>${item.price / 100}</h4>
+              <h4>${item.price / 100 * item.quantity}</h4>
+              <h5>Quantity: {item.quantity}</h5>
               <p>{item.description}</p>
               <button
                 type="button"
@@ -27,6 +28,9 @@ class Cart extends Component {
             </div>
           )
         })}
+        <button type="button" onClick={() => this.props.checkout(cart)}>
+          Checkout
+        </button>
       </div>
     )
   }
@@ -37,7 +41,8 @@ const mapState = state => ({
 })
 
 const mapDispatch = dispatch => ({
-  deleteItem: id => dispatch(deleteCartItem(id))
+  deleteItem: id => dispatch(deleteCartItem(id)),
+  checkout: cart => dispatch(checkoutCart(cart))
 })
 
 export default connect(mapState, mapDispatch)(Cart)

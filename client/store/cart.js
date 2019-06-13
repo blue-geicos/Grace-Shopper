@@ -11,6 +11,7 @@ const ADD_CART_ITEM = 'ADD_CART_ITEM'
 const REMOVE_CART_ITEM = 'REMOVE_CART_ITEM'
 const ADD_QUANTITY = 'ADD_QUANTITY'
 const REMOVE_QUANTITY = 'REMOVE_QUANTITY'
+const CHECKOUT = 'CHECKOUT'
 
 //Action Creator
 
@@ -32,6 +33,12 @@ const removeItem = id => {
   return {
     type: REMOVE_CART_ITEM,
     id
+  }
+}
+
+const checkout = () => {
+  return {
+    type: CHECKOUT
   }
 }
 
@@ -66,6 +73,15 @@ export const deleteCartItem = id => dispatch => {
   }
 }
 
+export const checkoutCart = cart => async dispatch => {
+  try {
+    await axios.post('/api/orders/guest-checkout', cart)
+    // dispatch(checkout())
+  } catch (err) {
+    console.error(err)
+  }
+}
+
 export default function(state = initialState, action) {
   switch (action.type) {
     case ADD_CART_ITEM:
@@ -80,7 +96,6 @@ export default function(state = initialState, action) {
             return item
           }
         })
-        console.log('newCart is: ', newCart)
         return {...state, cart: newCart}
       } else {
         itemToAdd.quantity = 1
