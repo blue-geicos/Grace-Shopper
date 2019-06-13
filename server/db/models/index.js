@@ -10,9 +10,10 @@ Order.belongsToMany(Item, {through: OrderItems})
 
 // hooks
 OrderItems.addHook('afterUpdate', orderItemsInstance => {
-  const item = Item.findbyPk(orderItemsInstance.itemId)
+  const item = Item.findByPk(orderItemsInstance.itemId)
   if (orderItemsInstance.quantity > item.stock) {
     orderItemsInstance.quantity = item.stock
+    return orderItemsInstance
   }
 })
 
