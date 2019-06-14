@@ -11,9 +11,10 @@ const initialState = {
 const ADD_CART_ITEM = 'ADD_CART_ITEM'
 const REMOVE_CART_ITEM = 'REMOVE_CART_ITEM'
 const ADD_QUANTITY = 'ADD_QUANTITY'
-const REMOVE_QUANTITY = 'REMOVE_QUANTITY'
+// const REMOVE_QUANTITY = 'REMOVE_QUANTITY'
 const CHECKOUT = 'CHECKOUT'
 const CREATE_CART_ID = 'CREATE_CART_ID'
+const CLEAR_CART = 'CLEAR_CART'
 
 //Action Creator
 
@@ -48,6 +49,12 @@ const createCartId = cartId => {
   return {
     type: CREATE_CART_ID,
     cartId
+  }
+}
+
+const clearCart = () => {
+  return {
+    type: CLEAR_CART
   }
 }
 
@@ -105,6 +112,13 @@ export const userCheckout = orderId => async dispatch => {
   }
 }
 
+export const clearCartThunk = () => dispatch => {
+  try {
+    dispatch(clearCart())
+  } catch (err) {
+    console.error(err)
+  }
+}
 export default function(state = initialState, action) {
   switch (action.type) {
     case ADD_CART_ITEM:
@@ -139,6 +153,8 @@ export default function(state = initialState, action) {
     //     addedItem.quantity += 1
     //   }
     //   return {...state, cart: [...state.cart, addedItem]}
+    case CLEAR_CART:
+      return initialState
     default:
       return state
   }
