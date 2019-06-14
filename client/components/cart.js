@@ -1,14 +1,24 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {deleteCartItem, guestCheckout, userCheckout} from '../store/cart'
+import {
+  deleteCartItem,
+  guestCheckout,
+  userCheckout,
+  getUserCartThunk
+} from '../store/cart'
 
 class Cart extends Component {
   constructor() {
     super()
   }
+
+  componentDidMount() {
+    if (this.props.userId) {
+      this.props.getUserCart(this.props.userId)
+    }
+  }
   render() {
-    const cart = this.props.cart
-    const cartId = this.props.cartId
+    const {cart, cartId, userId} = this.props
     return (
       <div>
         <h1>My Cart</h1>
@@ -31,7 +41,10 @@ class Cart extends Component {
         })}
 
         {this.props.isLoggedIn ? (
-          <button type="button" onClick={() => this.props.userCheckout(cartId)}>
+          <button
+            type="button"
+            onClick={() => this.props.userCheckout(cartId, userId)}
+          >
             Checkout
           </button>
         ) : (
@@ -47,13 +60,15 @@ class Cart extends Component {
 const mapState = state => ({
   cart: state.cart.cart,
   cartId: state.cart.cartId,
-  isLoggedIn: !!state.user.id
+  isLoggedIn: !!state.user.id,
+  userId: state.user.id
 })
 
 const mapDispatch = dispatch => ({
   deleteItem: id => dispatch(deleteCartItem(id)),
   guestCheckout: cart => dispatch(guestCheckout(cart)),
-  userCheckout: cartId => dispatch(userCheckout(cartId))
+  userCheckout: (cartId, userId) => dispatch(userCheckout(cartId, userId)),
+  getUserCart: userId => dispatch(getUserCartThunk(userId))
 })
 
 export default connect(mapState, mapDispatch)(Cart)

@@ -15,3 +15,10 @@ router.get('/', async (req, res, next) => {
     next(err)
   }
 })
+
+router.param('id', (req, res, next, id) => {
+  req.userId = id
+  next()
+})
+
+router.use('/:id/orders', require('./orders'))

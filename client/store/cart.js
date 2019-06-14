@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 /* eslint-disable no-case-declarations */
 import axios from 'axios'
 
@@ -15,6 +16,7 @@ const ADD_QUANTITY = 'ADD_QUANTITY'
 const CHECKOUT = 'CHECKOUT'
 const CREATE_CART_ID = 'CREATE_CART_ID'
 const CLEAR_CART = 'CLEAR_CART'
+const GET_USER_CART = 'GET_USER_CART'
 
 //Action Creator
 
@@ -58,13 +60,20 @@ const clearCart = () => {
   }
 }
 
+const getUserCart = cart => {
+  return {
+    type: GET_USER_CART,
+    cart
+  }
+}
+
 // Thunk Creator
 
 export const addCartItem = (itemId, userId, orderId) => async dispatch => {
   try {
     const {data} = await axios.get(`/api/items/${itemId}`)
     const body = {userId, itemId, orderId}
-    const res = await axios.put('/api/orders/add-to-cart', body)
+    const res = await axios.put(`/api/users/${userId}/orders/add-to-cart`, body)
     const cartId = res.data.id
     dispatch(createCartId(cartId))
     if (data) {
@@ -95,17 +104,16 @@ export const deleteCartItem = id => dispatch => {
 
 export const guestCheckout = cart => async dispatch => {
   try {
-    await axios.post('/api/orders/guest-checkout', cart)
+    await axios.post('/api/users/guest/orders/guest-checkout', cart)
     dispatch(checkout())
   } catch (err) {
     console.error(err)
   }
 }
 
-export const userCheckout = orderId => async dispatch => {
-  console.log('order id', orderId)
+export const userCheckout = (orderId, userId) => async dispatch => {
   try {
-    await axios.put('/api/orders/checkout', {orderId})
+    await axios.put(`/api/users/${userId}/orders/checkout`, {orderId})
     dispatch(checkout())
   } catch (err) {
     console.error(err)
@@ -119,6 +127,18 @@ export const clearCartThunk = () => dispatch => {
     console.error(err)
   }
 }
+
+export const getUserCartThunk = userId => async dispatch => {
+  try {
+    const {data} = await axios.get(`/api/users/${userId}/orders/cart`)
+    if (data) {
+      dispatch(getUserCart(data))
+    }
+  } catch (err) {
+    console.error(err)
+  }
+}
+
 export default function(state = initialState, action) {
   switch (action.type) {
     case ADD_CART_ITEM:
@@ -145,6 +165,8 @@ export default function(state = initialState, action) {
       return {...state, cart: [], cartId: undefined}
     case CREATE_CART_ID:
       return {...state, cartId: action.cartId}
+    case GET_USER_CART:
+      return {...state, cart: action.cart.cart, cartId: action.cart.orderId}
     // case ADD_QUANTITY:
     //   let addedItem = state.cart.find(item=> item.id === action.id)
     //   if (!addedItem) {
