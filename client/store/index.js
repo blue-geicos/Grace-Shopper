@@ -7,6 +7,7 @@ import items from './items'
 import cart from './cart'
 
 const reducer = combineReducers({items, user, cart})
+
 const persistedState = localStorage.getItem('reduxState')
   ? JSON.parse(localStorage.getItem('reduxState'))
   : {}
