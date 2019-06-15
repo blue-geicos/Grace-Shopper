@@ -11,7 +11,7 @@ const initialState = {
 //Action
 const ADD_CART_ITEM = 'ADD_CART_ITEM'
 const REMOVE_CART_ITEM = 'REMOVE_CART_ITEM'
-// const ADD_QUANTITY = 'ADD_QUANTITY'
+const ADD_QUANTITY = 'ADD_QUANTITY'
 const SUBTRACT_QUANTITY = 'SUBTRACT_QUANTITY'
 const CHECKOUT = 'CHECKOUT'
 const CREATE_CART_ID = 'CREATE_CART_ID'
@@ -27,12 +27,12 @@ const addItem = item => {
   }
 }
 
-// const addQuantity = id => {
-//   return {
-//     type: ADD_QUANTITY,
-//     id
-//   }
-// }
+const addQuantity = id => {
+  return {
+    type: ADD_QUANTITY,
+    id
+  }
+}
 
 const subtractQuantity = id => {
   return {
@@ -93,14 +93,14 @@ export const addCartItem = (itemId, userId, orderId) => async dispatch => {
   }
 }
 
-// export const addQuantityItem = id => dispatch => {
-//   try {
-//     dispatch(addQuantity(id))
-//   } catch (err) {
-//     console.error(err)
-//   }
-// }
-export const subtractQuantityItem = id => dispatch => {
+export const addItemQuantity = id => dispatch => {
+  try {
+    dispatch(addQuantity(id))
+  } catch (err) {
+    console.error(err)
+  }
+}
+export const subtractItemQuantity = id => dispatch => {
   try {
     dispatch(subtractQuantity(id))
   } catch (err) {
@@ -181,14 +181,22 @@ export default function(state = initialState, action) {
       return {...state, cartId: action.cartId}
     case GET_USER_CART:
       return {...state, cart: action.cart.cart, cartId: action.cart.orderId}
+    case ADD_QUANTITY:
+      let increasedCart = state.cart.map(item => {
+        if (item.id === action.id) {
+          item.quantity++
+          return item
+        }
+      })
+      return {...state, cart: increasedCart}
     case SUBTRACT_QUANTITY:
-      let newCart = state.cart.map(item => {
+      let decreasedCart = state.cart.map(item => {
         if (item.id === action.id) {
           item.quantity--
           return item
         }
       })
-      return {...state, cart: newCart}
+      return {...state, cart: decreasedCart}
     case CLEAR_CART:
       return initialState
     default:
