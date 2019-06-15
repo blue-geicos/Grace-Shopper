@@ -4,8 +4,15 @@ import {
   deleteCartItem,
   guestCheckout,
   userCheckout,
-  getUserCartThunk
+  getUserCartThunk,
+  addCartItem,
+  subtractQuantityItem
 } from '../store/cart'
+import clsx from 'clsx'
+import {makeStyles} from '@material-ui/core/styles'
+import MenuItem from '@material-ui/core/MenuItem'
+import TextField from '@material-ui/core/TextField'
+import {ListItemSecondaryAction} from '@material-ui/core'
 
 class Cart extends Component {
   constructor() {
@@ -17,8 +24,15 @@ class Cart extends Component {
       this.props.getUserCart(this.props.userId)
     }
   }
+
+  handleCheckout = function(cartId, userId) {
+    this.props.isLoggedIn
+      ? this.props.userCheckout(cartId, userId)
+      : this.props.guestCheckout(cartId, userId)
+  }
+
   render() {
-    const {cart, cartId, userId} = this.props
+    const {cart, cartId, userId, subtractItem, addItem, deleteItem} = this.props
     return (
       <div>
         <h1>My Cart</h1>
@@ -28,29 +42,35 @@ class Cart extends Component {
               <h1>{item.name}</h1>
               <img src={item.imageUrl} />
               <h4>${item.price / 100 * item.quantity}</h4>
-              <h5>Quantity: {item.quantity}</h5>
+              <h5>
+                <button type="button" onClick={() => subtractItem(item.id)}>
+                  -
+                </button>
+                {item.quantity}
+                <button
+                  type="button"
+                  onClick={() => addItem(item.id, userId, cartId)}
+                >
+                  {item.id}
+                </button>
+              </h5>
               <p>{item.description}</p>
-              <button
-                type="button"
-                onClick={() => this.props.deleteItem(item.id)}
-              >
+              <button type="button" onClick={() => deleteItem(item.id)}>
                 Delete
               </button>
             </div>
           )
         })}
 
-        {this.props.isLoggedIn ? (
+        {cart.length ? (
           <button
             type="button"
-            onClick={() => this.props.userCheckout(cartId, userId)}
+            onClick={() => this.handleCheckout(cartId, userId)}
           >
             Checkout
           </button>
         ) : (
-          <button type="button" onClick={() => this.props.guestCheckout(cart)}>
-            Checkout
-          </button>
+          <div>There's nothing in your cart!</div>
         )}
       </div>
     )
@@ -68,7 +88,10 @@ const mapDispatch = dispatch => ({
   deleteItem: id => dispatch(deleteCartItem(id)),
   guestCheckout: cart => dispatch(guestCheckout(cart)),
   userCheckout: (cartId, userId) => dispatch(userCheckout(cartId, userId)),
-  getUserCart: userId => dispatch(getUserCartThunk(userId))
+  getUserCart: userId => dispatch(getUserCartThunk(userId)),
+  addItem: (itemId, userId, orderId) =>
+    dispatch(addCartItem(itemId, userId, orderId)),
+  subtractItem: itemId => dispatch(subtractQuantityItem(itemId))
 })
 
 export default connect(mapState, mapDispatch)(Cart)

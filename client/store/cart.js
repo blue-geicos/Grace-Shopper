@@ -11,8 +11,8 @@ const initialState = {
 //Action
 const ADD_CART_ITEM = 'ADD_CART_ITEM'
 const REMOVE_CART_ITEM = 'REMOVE_CART_ITEM'
-const ADD_QUANTITY = 'ADD_QUANTITY'
-// const REMOVE_QUANTITY = 'REMOVE_QUANTITY'
+// const ADD_QUANTITY = 'ADD_QUANTITY'
+const SUBTRACT_QUANTITY = 'SUBTRACT_QUANTITY'
 const CHECKOUT = 'CHECKOUT'
 const CREATE_CART_ID = 'CREATE_CART_ID'
 const CLEAR_CART = 'CLEAR_CART'
@@ -27,9 +27,16 @@ const addItem = item => {
   }
 }
 
-const addQuantity = id => {
+// const addQuantity = id => {
+//   return {
+//     type: ADD_QUANTITY,
+//     id
+//   }
+// }
+
+const subtractQuantity = id => {
   return {
-    type: ADD_QUANTITY,
+    type: SUBTRACT_QUANTITY,
     id
   }
 }
@@ -86,9 +93,16 @@ export const addCartItem = (itemId, userId, orderId) => async dispatch => {
   }
 }
 
-export const addQuantityItem = id => dispatch => {
+// export const addQuantityItem = id => dispatch => {
+//   try {
+//     dispatch(addQuantity(id))
+//   } catch (err) {
+//     console.error(err)
+//   }
+// }
+export const subtractQuantityItem = id => dispatch => {
   try {
-    dispatch(addQuantity(id))
+    dispatch(subtractQuantity(id))
   } catch (err) {
     console.error(err)
   }
@@ -167,14 +181,14 @@ export default function(state = initialState, action) {
       return {...state, cartId: action.cartId}
     case GET_USER_CART:
       return {...state, cart: action.cart.cart, cartId: action.cart.orderId}
-    // case ADD_QUANTITY:
-    //   let addedItem = state.cart.find(item=> item.id === action.id)
-    //   if (!addedItem) {
-    //     addedItem.quantity = 1
-    //   } else {
-    //     addedItem.quantity += 1
-    //   }
-    //   return {...state, cart: [...state.cart, addedItem]}
+    case SUBTRACT_QUANTITY:
+      let newCart = state.cart.map(item => {
+        if (item.id === action.id) {
+          item.quantity--
+          return item
+        }
+      })
+      return {...state, cart: newCart}
     case CLEAR_CART:
       return initialState
     default:
