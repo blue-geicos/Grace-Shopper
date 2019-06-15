@@ -35,3 +35,16 @@ form div {
   display: flex;
   justify-content: space-between;
 }
+
+.cart-title {
+  text-align: center;
+}
+
+.cart-checkout-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.cart-item-container {
+  flex-basis: 60%;
+}

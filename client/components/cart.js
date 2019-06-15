@@ -31,54 +31,59 @@ class Cart extends Component {
     const {cart, cartId, userId, subtractItem, addItem, deleteItem} = this.props
     return (
       <div>
-        <h1>Shopping Cart</h1>
-        <div className="cart-items-title">
-          <h2>Product</h2>
-          <h2>Total</h2>
+        <h1 className="cart-title">Shopping Cart</h1>
+        <div className="cart-checkout-container">
+          <div className="cart-item-container">
+            <div className="cart-items-title">
+              <h2>Product</h2>
+              <h2>Total</h2>
+            </div>
+            {cart.map(item => {
+              return (
+                <CartItem
+                  item={item}
+                  key={item.id}
+                  addItem={addItem}
+                  subtractItem={subtractItem}
+                  deleteItem={deleteItem}
+                />
+                // <div key={item.id}>
+                //   <h1>{item.name}</h1>
+                //   <img src={item.imageUrl} />
+                //   <h4>${item.price / 100 * item.quantity}</h4>
+                //   <h5>
+                //     <button type="button" onClick={() => subtractItem(item.id)}>
+                //       -
+                //     </button>
+                //     {item.quantity}
+                //     <button
+                //       type="button"
+                //       onClick={() => addItem(item.id, userId, cartId)}
+                //     >
+                //       {item.id}
+                //     </button>
+                //   </h5>
+                //   <p>{item.description}</p>
+                //   <button type="button" onClick={() => deleteItem(item.id)}>
+                //     Delete
+                //   </button>
+                // </div>
+              )
+            })}
+          </div>
+          <div>
+            {cart.length ? (
+              <button
+                type="button"
+                onClick={() => this.handleCheckout(cartId, userId)}
+              >
+                Checkout
+              </button>
+            ) : (
+              <div>There's nothing in your cart!</div>
+            )}
+          </div>
         </div>
-        {cart.map(item => {
-          return (
-            <CartItem
-              item={item}
-              key={item.id}
-              addItem={addItem}
-              subtractItem={subtractItem}
-              deleteItem={deleteItem}
-            />
-            // <div key={item.id}>
-            //   <h1>{item.name}</h1>
-            //   <img src={item.imageUrl} />
-            //   <h4>${item.price / 100 * item.quantity}</h4>
-            //   <h5>
-            //     <button type="button" onClick={() => subtractItem(item.id)}>
-            //       -
-            //     </button>
-            //     {item.quantity}
-            //     <button
-            //       type="button"
-            //       onClick={() => addItem(item.id, userId, cartId)}
-            //     >
-            //       {item.id}
-            //     </button>
-            //   </h5>
-            //   <p>{item.description}</p>
-            //   <button type="button" onClick={() => deleteItem(item.id)}>
-            //     Delete
-            //   </button>
-            // </div>
-          )
-        })}
-
-        {cart.length ? (
-          <button
-            type="button"
-            onClick={() => this.handleCheckout(cartId, userId)}
-          >
-            Checkout
-          </button>
-        ) : (
-          <div>There's nothing in your cart!</div>
-        )}
       </div>
     )
   }
