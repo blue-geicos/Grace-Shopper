@@ -9,6 +9,7 @@ import {
   subtractItemQuantity
 } from '../store/cart'
 import CartItem from './cart-item'
+import CartSummary from './cart-summary'
 
 class Cart extends Component {
   constructor() {
@@ -47,38 +48,16 @@ class Cart extends Component {
                   subtractItem={subtractItem}
                   deleteItem={deleteItem}
                 />
-                // <div key={item.id}>
-                //   <h1>{item.name}</h1>
-                //   <img src={item.imageUrl} />
-                //   <h4>${item.price / 100 * item.quantity}</h4>
-                //   <h5>
-                //     <button type="button" onClick={() => subtractItem(item.id)}>
-                //       -
-                //     </button>
-                //     {item.quantity}
-                //     <button
-                //       type="button"
-                //       onClick={() => addItem(item.id, userId, cartId)}
-                //     >
-                //       {item.id}
-                //     </button>
-                //   </h5>
-                //   <p>{item.description}</p>
-                //   <button type="button" onClick={() => deleteItem(item.id)}>
-                //     Delete
-                //   </button>
-                // </div>
               )
             })}
           </div>
           <div>
             {cart.length ? (
-              <button
-                type="button"
-                onClick={() => this.handleCheckout(cartId, userId)}
-              >
-                Checkout
-              </button>
+              <CartSummary
+                handleCheckout={this.handleCheckout}
+                cartId={cartId}
+                userId={userId}
+              />
             ) : (
               <div>There's nothing in your cart!</div>
             )}
