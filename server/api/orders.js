@@ -49,13 +49,13 @@ router.post('/guest-checkout', async (req, res, next) => {
 router.put('/add-to-cart', async (req, res, next) => {
   try {
     let order
+    const user = await User.findByPk(req.body.userId)
     if (req.body.orderId) {
       order = await Order.findByPk(req.body.orderId, {include: [{model: Item}]})
     } else {
       order = await Order.create()
+      await order.setUser(user)
     }
-    const user = await User.findByPk(req.body.userId)
-    await order.setUser(user)
     const orderItemsObject = await order.getItems()
 
     let inCart = false
@@ -69,12 +69,9 @@ router.put('/add-to-cart', async (req, res, next) => {
           }
         })
         const newQuantity = itemToUpdate.quantity + 1
-        await itemToUpdate.update(
-          {
-            quantity: newQuantity
-          },
-          {returning: true}
-        )
+        await itemToUpdate.update({
+          quantity: newQuantity
+        })
       }
     })
 
@@ -88,6 +85,42 @@ router.put('/add-to-cart', async (req, res, next) => {
   }
 })
 
+router.put('/increase-quantity', async (req, res, next) => {
+  try {
+    const itemToUpdate = await OrderItems.findOne({
+      where: {
+        itemId: req.body.itemId,
+        orderId: req.body.orderId
+      }
+    })
+    const newQuantity = itemToUpdate.quantity + 1
+    await itemToUpdate.update({
+      quantity: newQuantity
+    })
+    res.json(itemToUpdate)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.put('/decrease-quantity', async (req, res, next) => {
+  try {
+    const itemToUpdate = await OrderItems.findOne({
+      where: {
+        itemId: req.body.itemId,
+        orderId: req.body.orderId
+      }
+    })
+    const newQuantity = itemToUpdate.quantity - 1
+    await itemToUpdate.update({
+      quantity: newQuantity
+    })
+    res.json(itemToUpdate)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.get('/cart', async (req, res, next) => {
   try {
     const orderData = await Order.findOne({
@@ -95,6 +128,20 @@ router.get('/cart', async (req, res, next) => {
     })
     const cart = await orderData.getOrderWithItemsAndQuantities()
     res.json(cart)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.delete('/:orderId/:itemId/remove-from-cart', async (req, res, next) => {
+  try {
+    await OrderItems.destroy({
+      where: {
+        itemId: req.params.itemId,
+        orderId: req.params.orderId
+      }
+    })
+    res.sendStatus(204)
   } catch (err) {
     next(err)
   }

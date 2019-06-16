@@ -48,3 +48,7 @@ form div {
 .cart-item-container {
   flex-basis: 60%;
 }
+
+.cart-empty {
+  text-align: center;
+}
