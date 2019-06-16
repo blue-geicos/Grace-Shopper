@@ -30,6 +30,7 @@ class Cart extends Component {
 
   render() {
     const {cart, cartId, userId, subtractItem, addItem, deleteItem} = this.props
+    let subtotal = 0
     return (
       <div>
         <h1 className="cart-title">Shopping Cart</h1>
@@ -40,6 +41,7 @@ class Cart extends Component {
               <h2>Total</h2>
             </div>
             {cart.map(item => {
+              subtotal += item.price * item.quantity / 100
               return (
                 <CartItem
                   item={item}
@@ -57,6 +59,7 @@ class Cart extends Component {
                 handleCheckout={this.handleCheckout}
                 cartId={cartId}
                 userId={userId}
+                subtotal={subtotal}
               />
             ) : (
               <div>There's nothing in your cart!</div>

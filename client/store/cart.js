@@ -5,8 +5,7 @@ import axios from 'axios'
 // initial state
 const initialState = {
   cart: [],
-  cartId: undefined,
-  cartTotal: undefined
+  cartId: undefined
 }
 
 //Action
