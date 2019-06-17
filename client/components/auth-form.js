@@ -17,7 +17,8 @@ import Container from '@material-ui/core/Container'
 const useStyles = makeStyles(theme => ({
   '@global': {
     body: {
-      backgroundColor: theme.palette.common.white
+      backgroundColor: theme.palette.common.white,
+      fontFamily: 'Noto Sans HK'
     }
   },
   paper: {
@@ -32,10 +33,12 @@ const useStyles = makeStyles(theme => ({
   },
   form: {
     width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1)
+    marginTop: theme.spacing(3)
   },
   submit: {
-    margin: theme.spacing(3, 0, 2)
+    margin: theme.spacing(3, 0, 2),
+    backgroundColor: '#f50057',
+    width: '111%'
   }
 }))
 
@@ -47,7 +50,7 @@ const AuthForm = props => {
   const classes = useStyles()
 
   return (
-    <div>
+    <div className="form">
       <form onSubmit={handleSubmit} name={name}>
         {name === 'signup' ? (
           <Container component="main" maxWidth="xs">
@@ -69,17 +72,18 @@ const AuthForm = props => {
                   variant="outlined"
                   margin="normal"
                   required
-                  fullWidth
+                  fullWidth={true}
                   id="firstName"
                   label="First Name"
                   name="firstName"
+                  autoFocus
                   // autoComplete="email"
                 />
                 <TextField
                   variant="outlined"
                   margin="normal"
                   required
-                  fullWidth
+                  fullWidth={true}
                   id="lastName"
                   label="Last Name"
                   name="lastName"
@@ -89,9 +93,9 @@ const AuthForm = props => {
                   variant="outlined"
                   margin="normal"
                   required
-                  fullWidth
+                  fullWidth={true}
                   id="email"
-                  label="Email Address"
+                  label="Email"
                   name="email"
                   // autoComplete="email"
                 />
@@ -99,13 +103,14 @@ const AuthForm = props => {
                   variant="outlined"
                   margin="normal"
                   required
-                  fullWidth
+                  fullWidth={true}
                   name="password"
                   label="Password"
                   type="password"
                   id="password"
                   // autoComplete="current-password"
                 />
+
                 <Button
                   type="submit"
                   fullWidth
@@ -116,6 +121,9 @@ const AuthForm = props => {
                   Sign In
                 </Button>
                 <Grid container>
+                  <Grid item xs>
+                    <a href="/auth/google">{displayName} with Google</a>
+                  </Grid>
                   <Grid item>
                     <Link to="/signup" variant="body2">
                       {"Don't have an account? Sign Up"}
@@ -145,9 +153,9 @@ const AuthForm = props => {
                   variant="outlined"
                   margin="normal"
                   required
-                  fullWidth
+                  fullWidth={true}
                   id="email"
-                  label="Email Address"
+                  label="Email"
                   name="email"
                   // autoComplete="email"
                 />
@@ -155,23 +163,29 @@ const AuthForm = props => {
                   variant="outlined"
                   margin="normal"
                   required
-                  fullWidth
+                  fullWidth={true}
                   name="password"
                   label="Password"
                   type="password"
                   id="password"
                   // autoComplete="current-password"
                 />
-                <Button
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  color="primary"
-                  className={classes.submit}
-                >
-                  Sign In
-                </Button>
+                <div className="formButton">
+                  <Button
+                    type="submit"
+                    fullWidth={true}
+                    variant="contained"
+                    color="blue"
+                    className={classes.submit}
+                    maxWidth="xs"
+                  >
+                    Sign In
+                  </Button>
+                </div>
                 <Grid container>
+                  <Grid item xs>
+                    <a href="/auth/google">{displayName} with Google</a>
+                  </Grid>
                   <Grid item>
                     <Link to="/signup" variant="body2">
                       {"Don't have an account? Sign Up"}
@@ -185,7 +199,6 @@ const AuthForm = props => {
 
         {error && error.response && <div> {error.response.data} </div>}
       </form>
-      <a href="/auth/google">{displayName} with Google</a>
     </div>
   )
 }
