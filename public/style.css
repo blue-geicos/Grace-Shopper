@@ -25,7 +25,6 @@ body {
 
 a {
   text-decoration: none;
-  color: lightcoral;
 }
 
 label {
@@ -56,7 +55,7 @@ form div {
 .container {
   display: flex;
   justify-content: space-between;
-  background-color: lightcoral;
+  background-color: white;
   color: black;
   padding: 0px 0.1px 0.1px 0px;
 }
@@ -65,7 +64,7 @@ form div {
   display: flex;
   justify-content: space-around;
   flex-grow: 0.3;
-  color: white;
+  color: grey;
 }
 .cart-items-title {
   display: flex;
@@ -96,7 +95,7 @@ form div {
 .allProductsNav {
   justify-content: center;
   font-size: 15px;
-  color: white;
+  color: grey;
   font: 'Noto Sans HK';
 }
 
