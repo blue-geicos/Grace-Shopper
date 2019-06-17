@@ -82,7 +82,9 @@ export const addCartItem = (itemId, userId, orderId) => async dispatch => {
     const body = {userId, itemId, orderId}
     const res = await axios.put(`/api/users/${userId}/orders/add-to-cart`, body)
     const cartId = res.data.id
-    dispatch(createCartId(cartId))
+    if (!orderId) {
+      dispatch(createCartId(cartId))
+    }
     if (data) {
       dispatch(addItem(data))
     } else {
@@ -93,24 +95,45 @@ export const addCartItem = (itemId, userId, orderId) => async dispatch => {
   }
 }
 
-export const addItemQuantity = id => dispatch => {
+export const addItemQuantity = (itemId, userId, orderId) => async dispatch => {
   try {
-    dispatch(addQuantity(id))
+    const body = {itemId, orderId}
+    const {data} = await axios.put(
+      `/api/users/${userId}/orders/increase-quantity`,
+      body
+    )
+    if (data) {
+      dispatch(addQuantity(itemId))
+    }
   } catch (err) {
     console.error(err)
   }
 }
-export const subtractItemQuantity = id => dispatch => {
+export const subtractItemQuantity = (
+  itemId,
+  userId,
+  orderId
+) => async dispatch => {
   try {
-    dispatch(subtractQuantity(id))
+    const body = {itemId, orderId}
+    const {data} = await axios.put(
+      `/api/users/${userId}/orders/decrease-quantity`,
+      body
+    )
+    if (data) {
+      dispatch(subtractQuantity(itemId))
+    }
   } catch (err) {
     console.error(err)
   }
 }
 
-export const deleteCartItem = id => dispatch => {
+export const deleteCartItem = (itemId, userId, orderId) => async dispatch => {
   try {
-    dispatch(removeItem(id))
+    await axios.delete(
+      `/api/users/${userId}/orders/${orderId}/${itemId}/remove-from-cart`
+    )
+    dispatch(removeItem(itemId))
   } catch (err) {
     console.error(err)
   }
@@ -164,8 +187,8 @@ export default function(state = initialState, action) {
         let newCart = state.cart.map(item => {
           if (item.id === itemToAdd.id) {
             item.quantity++
-            return item
           }
+          return item
         })
         return {...state, cart: newCart}
       } else {
@@ -185,16 +208,16 @@ export default function(state = initialState, action) {
       let increasedCart = state.cart.map(item => {
         if (item.id === action.id) {
           item.quantity++
-          return item
         }
+        return item
       })
       return {...state, cart: increasedCart}
     case SUBTRACT_QUANTITY:
       let decreasedCart = state.cart.map(item => {
         if (item.id === action.id) {
           item.quantity--
-          return item
         }
+        return item
       })
       return {...state, cart: decreasedCart}
     case CLEAR_CART:

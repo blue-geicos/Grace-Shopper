@@ -23,8 +23,8 @@ const useStyles = makeStyles(theme => ({
     paddingLeft: 10
   },
   'item-image': {
-    width: '20%',
-    height: '100%',
+    width: 150,
+    height: 190,
     padding: 10
   },
   'item-info': {
@@ -36,7 +36,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-export default function CartItem({item, subtractItem, addItem, deleteItem}) {
+export default function CartItem({item, handleEditItem}) {
   const classes = useStyles()
   return (
     <div className={classes['item-info']}>
@@ -51,7 +51,7 @@ export default function CartItem({item, subtractItem, addItem, deleteItem}) {
                 color="primary"
                 className={classes['quantity-button']}
                 aria-label="increase item quantity"
-                onClick={() => addItem(item.id)}
+                onClick={() => handleEditItem(item.id, 'add')}
               >
                 <i className="material-icons">arrow_drop_up</i>
               </IconButton>
@@ -59,14 +59,14 @@ export default function CartItem({item, subtractItem, addItem, deleteItem}) {
                 color="primary"
                 className={classes['quantity-button']}
                 aria-label="decrease item quantity"
-                onClick={() => subtractItem(item.id)}
+                onClick={() => handleEditItem(item.id, 'subtract')}
               >
                 <i className="material-icons">arrow_drop_down</i>
               </IconButton>
             </div>
             <Button
               className={classes.button}
-              onClick={() => deleteItem(item.id)}
+              onClick={() => handleEditItem(item.id, 'remove')}
             >
               Remove
             </Button>
@@ -74,9 +74,7 @@ export default function CartItem({item, subtractItem, addItem, deleteItem}) {
           <p>{item.description}</p>
         </div>
       </div>
-      <h4>${item.price / 100 * item.quantity}</h4>
+      <h4>${item.price * item.quantity / 100}</h4>
     </div>
   )
 }
-
-// export default giveStyles(CartItem)
