@@ -16,7 +16,7 @@ body {
 .homeImageText {
   position: absolute;
   text-align: center;
-  color: black;
+  color: #ff1744;
   font-size: 65px;
 }
 
@@ -67,4 +67,5 @@ form div {
 .homePageCard {
   display: flex;
   justify-content: space-around;
+  margin: 5em;
 }

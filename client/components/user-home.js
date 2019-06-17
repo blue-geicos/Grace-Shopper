@@ -15,19 +15,21 @@ import Icon from '@material-ui/core/Icon'
 import RestoreIcon from '@material-ui/icons/Restore'
 import FavoriteIcon from '@material-ui/icons/Favorite'
 import LocationOnIcon from '@material-ui/icons/LocationOn'
+import Hidden from '@material-ui/core/Hidden'
 
 /**
  * COMPONENT
  */
 const useStyles = makeStyles({
   card: {
-    display: 'flex'
+    display: 'flex',
+    maxWidth: 345
   },
   cardDetails: {
     flex: 1
   },
-  cardMedia: {
-    width: 160
+  root: {
+    width: 1400
   }
 })
 export const UserHome = () => {
@@ -36,20 +38,24 @@ export const UserHome = () => {
     <div className="homeImage">
       <div className="homeImageText">
         <h1>Give The Perfect Gift</h1>
-        <Button variant="contained">Discover More</Button>
       </div>
       <img
         src="https://cdn.shopify.com/s/files/1/0943/2026/products/beautiful_care_package-6261_9f805014-7ecb-42d3-b713-fcca656dc577_1024x1024.jpg?v=1548644101"
-        height="65%"
+        height="75%"
         width="100%"
       />
+
       <div className="homePageCard">
         <Card className={classes.card}>
           <CardActionArea>
             <CardMedia
-              className={classes.cardMedia}
+              component="img"
+              alt="Gift Box"
+              height="140"
               image="https://cdn.shopify.com/s/files/1/0607/3169/products/IMG_1350_300x300.JPG?v=1550728967"
+              title="image one"
             />
+
             <CardContent className={classes.cardDetails}>
               <Typography gutterBottom variant="h5" component="h2">
                 Best Sellers
@@ -65,17 +71,20 @@ export const UserHome = () => {
         </Card>
         <Card className={classes.card}>
           <CardActionArea>
-            <CardMedia
-              className={classes.cardMedia}
-              image="https://static.wixstatic.com/media/ccd6ee_2fed0eedba8c4428b27e39d22b1cdaf9~mv2.jpg/v1/fit/w_498,h_484,q_90/file.jpg"
-            />
+            <Hidden xsDown>
+              <CardMedia
+                component="img"
+                alt="Gift Box"
+                height="140"
+                image="https://static.wixstatic.com/media/ccd6ee_2fed0eedba8c4428b27e39d22b1cdaf9~mv2.jpg/v1/fit/w_498,h_484,q_90/file.jpg"
+                title="image two"
+              />
+            </Hidden>
             <CardContent className={classes.cardDetails}>
               <Typography gutterBottom variant="h5" component="h2">
                 Build Your Own
               </Typography>
-              <Typography variant="body2" component="p">
-                Craft a more personalized care package.
-              </Typography>
+              <Typography>Craft a more personalized care package.</Typography>
             </CardContent>
           </CardActionArea>
           <CardActions>
@@ -99,11 +108,6 @@ export const UserHome = () => {
           value="nearby"
           icon={<LocationOnIcon />}
         />
-        <BottomNavigationAction
-          label="Folder"
-          value="folder"
-          icon={<Icon>folder</Icon>}
-        />
       </BottomNavigation>
     </div>
   )
@@ -119,10 +123,3 @@ const mapState = state => {
 }
 
 export default connect(mapState)(UserHome)
-
-/**
- * PROP TYPES
- */
-UserHome.propTypes = {
-  email: PropTypes.string
-}
