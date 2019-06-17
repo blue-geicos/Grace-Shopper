@@ -1,3 +1,7 @@
+* {
+  font-family: 'Noto Sans HK', sans-serif;
+}
+
 body {
   font-family: 'Noto Sans HK', sans-serif;
   color: black;
@@ -35,6 +39,10 @@ nav {
   font: 'Noto Sans HK';
 }
 
+h1 {
+  color: lightcoral;
+}
+
 h3 {
   color: lightslategrey;
 }
@@ -56,6 +64,7 @@ form div {
   display: flex;
   justify-content: space-around;
   flex-grow: 0.3;
+  color: grey;
 }
 .cart-items-title {
   display: flex;
@@ -86,7 +95,7 @@ form div {
 .allProductsNav {
   justify-content: center;
   font-size: 15px;
-
+  color: grey;
   font: 'Noto Sans HK';
 }
 
@@ -97,12 +106,17 @@ form div {
 }
 
 #all-items {
-  width: 100vw;
-  display: block;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
 }
 
 .all-view {
   text-align: center;
+}
+
+.item-card-title {
+  color: lightcoral;
 }
 
 .single-item {
@@ -119,7 +133,8 @@ form div {
   height: 100vh;
   width: auto;
   border-radius: 15px;
-  border: lightcoral, 5px, solid;
+  border: 5px, solid, lightcoral;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 6px 20px 0 rgba(0, 0, 0, 0.05);
   flex: 3;
 }
 

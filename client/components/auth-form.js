@@ -38,6 +38,7 @@ const useStyles = makeStyles(theme => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
     backgroundColor: '#f50057',
+    color: '#FFF',
     width: '111%'
   }
 }))
