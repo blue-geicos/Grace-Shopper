@@ -2,7 +2,15 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
-import {Login, Signup, UserHome, AllItems, SingleItem, Cart} from './components'
+import {
+  Login,
+  Signup,
+  UserHome,
+  AllItems,
+  SingleItem,
+  Cart,
+  Checkout
+} from './components'
 import {me, fetchItems} from './store'
 
 /**
@@ -14,7 +22,7 @@ class Routes extends Component {
   }
 
   render() {
-    const {isLoggedIn} = this.props
+    const {isLoggedIn, successfulCheckout} = this.props
 
     return (
       <Switch>
@@ -25,6 +33,10 @@ class Routes extends Component {
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route path="/home" component={UserHome} />
+        <Route
+          path="/checkout"
+          component={() => <Checkout successfulCheckout={successfulCheckout} />}
+        />
 
         {isLoggedIn && (
           <Switch>
@@ -46,7 +58,8 @@ const mapState = state => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    successfulCheckout: state.cart.successfulCheckout
   }
 }
 
@@ -68,5 +81,6 @@ export default withRouter(connect(mapState, mapDispatch)(Routes))
  */
 Routes.propTypes = {
   loadInitialData: PropTypes.func.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired
+  isLoggedIn: PropTypes.bool.isRequired,
+  successfulCheckout: PropTypes.string.isRequired
 }

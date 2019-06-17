@@ -5,7 +5,8 @@ import axios from 'axios'
 // initial state
 const initialState = {
   cart: [],
-  cartId: undefined
+  cartId: undefined,
+  successfulCheckout: undefined
 }
 
 //Action
@@ -48,9 +49,10 @@ const removeItem = id => {
   }
 }
 
-const checkout = () => {
+const checkout = successfulCheckout => {
   return {
-    type: CHECKOUT
+    type: CHECKOUT,
+    successfulCheckout
   }
 }
 
@@ -147,7 +149,7 @@ export const guestCheckout = (cart, total) => async dispatch => {
       body
     )
     console.log('receipt url', data)
-    dispatch(checkout())
+    dispatch(checkout(data))
   } catch (err) {
     console.error(err)
   }
@@ -160,7 +162,7 @@ export const userCheckout = (orderId, userId, total) => async dispatch => {
       total
     })
     console.log('receipt url', data)
-    dispatch(checkout())
+    dispatch(checkout(data))
   } catch (err) {
     console.error(err)
   }
@@ -208,7 +210,12 @@ export default function(state = initialState, action) {
       const itemsToKeep = state.cart.filter(item => item.id !== action.id)
       return {...state, cart: itemsToKeep}
     case CHECKOUT:
-      return {...state, cart: [], cartId: undefined}
+      return {
+        ...state,
+        cart: [],
+        cartId: undefined,
+        successfulCheckout: action.successfulCheckout
+      }
     case CREATE_CART_ID:
       return {...state, cartId: action.cartId}
     case GET_USER_CART:

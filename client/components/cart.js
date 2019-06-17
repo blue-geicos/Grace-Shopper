@@ -40,7 +40,7 @@ class Cart extends Component {
   }
 
   render() {
-    const {cart, cartId, userId} = this.props
+    const {cart, cartId, userId, successfulCheckout} = this.props
     let subtotal = 0
     return (
       <div>
@@ -70,6 +70,7 @@ class Cart extends Component {
                   cartId={cartId}
                   userId={userId}
                   subtotal={subtotal}
+                  successfulCheckout={successfulCheckout}
                 />
               )}
             </div>
@@ -86,7 +87,8 @@ const mapState = state => ({
   cart: state.cart.cart,
   cartId: state.cart.cartId,
   isLoggedIn: !!state.user.id,
-  userId: state.user.id
+  userId: state.user.id,
+  successfulCheckout: state.cart.successfulCheckout
 })
 
 const mapDispatch = dispatch => ({

@@ -34,7 +34,8 @@ export default function CartSummary({
   handleCheckout,
   cartId,
   userId,
-  subtotal
+  subtotal,
+  successfulCheckout
 }) {
   const classes = useStyles()
 
