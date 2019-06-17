@@ -16,7 +16,7 @@ import Grid from '@material-ui/core/Grid'
 
 const useStyles = makeStyles({
   card: {
-    width: 350
+    width: 450
   },
   media: {
     height: 325
@@ -27,7 +27,7 @@ const useStylesGrid = makeStyles(theme => ({
   container: {
     display: 'grid',
     gridTemplateColumns: 'repeat(12, 1fr)',
-    gridGap: theme.spacing(3)
+    gridGap: theme.spacing(5)
   }
 }))
 
@@ -36,12 +36,13 @@ export const AllItems = props => {
   const gridClasses = useStylesGrid()
 
   return (
-    <div>
-      <h1>All Items</h1>
-      <Grid container spacing={3}>
+    <div id="all-items">
+      <h3>All Items</h3>
+      <br />
+      <Grid container spacing={5}>
         {props.items.map(item => (
-          <div key={item.id}>
-            <Grid item>
+          <div key={item.id} className="all-view">
+            <Grid item className={gridClasses}>
               <Link to={`/items/${item.id}`}>
                 <Card className={classes.card}>
                   <CardActionArea>
@@ -59,22 +60,10 @@ export const AllItems = props => {
                         color="textSecondary"
                         component="p"
                       >
-                        {item.description}
-                      </Typography>
-                      <Typography
-                        variant="body2"
-                        color="textSecondary"
-                        component="p"
-                      >
                         ${item.price / 100}
                       </Typography>
                     </CardContent>
                   </CardActionArea>
-                  <CardActions>
-                    <Button size="small" color="primary">
-                      View Item
-                    </Button>
-                  </CardActions>
                 </Card>
               </Link>
             </Grid>

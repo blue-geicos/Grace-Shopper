@@ -35,6 +35,10 @@ nav {
   font: 'Noto Sans HK';
 }
 
+h3 {
+  color: lightslategrey;
+}
+
 form div {
   margin: 1em;
   display: inline-block;
@@ -91,3 +95,41 @@ form div {
   justify-content: space-around;
   margin: 5em;
 }
+
+#all-items {
+  width: 100vw;
+  display: block;
+}
+
+.all-view {
+  text-align: center;
+}
+
+.single-item {
+  padding: 25px;
+  text-align: center;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  flex-grow: 5;
+}
+
+.single-item img {
+  display: block;
+  height: 100vh;
+  width: auto;
+  border-radius: 15px;
+  border: lightcoral, 5px, solid;
+  flex: 3;
+}
+
+.single-item-desc {
+  align-content: start;
+  padding: 15px;
+  flex-direction: column;
+  flex: 2;
+}
+
+/* .single-desc p {
+  text-align: left
+} */

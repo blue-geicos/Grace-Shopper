@@ -3,6 +3,8 @@ import {connect} from 'react-redux'
 import {fetchSingleItem} from '../store/items'
 import {addCartItem} from '../store/cart'
 
+import Button from '@material-ui/core/Button'
+
 class SingleItem extends Component {
   constructor() {
     super()
@@ -18,16 +20,26 @@ class SingleItem extends Component {
     const orderId = this.props.orderId
     return (
       <div>
-        <h1>{item.name}</h1>
-        <img src={item.imageUrl} />
-        <h4>${item.price / 100}</h4>
-        <p>{item.description}</p>
-        <button
-          type="button"
-          onClick={() => this.props.addItem(item.id, userId, orderId)}
-        >
-          Add To Cart
-        </button>
+        <div className="single-item">
+          <img src={item.imageUrl} />
+          <div className="single-item-desc">
+            <h1>{item.name}</h1>
+            <h3>${item.price / 100}</h3>
+            <h4>Write a message:</h4>
+            <textarea rows="4" cols="50" />
+            <br />
+            <p className="single-desc">{item.description}</p>
+            <br />
+            <Button
+              variant="outlined"
+              color="primary"
+              type="button"
+              onClick={() => this.props.addItem(item.id, userId, orderId)}
+            >
+              Add To Cart
+            </Button>
+          </div>
+        </div>
       </div>
     )
   }
