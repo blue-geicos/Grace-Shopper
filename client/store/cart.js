@@ -12,7 +12,7 @@ const initialState = {
 const ADD_CART_ITEM = 'ADD_CART_ITEM'
 const REMOVE_CART_ITEM = 'REMOVE_CART_ITEM'
 const ADD_QUANTITY = 'ADD_QUANTITY'
-// const REMOVE_QUANTITY = 'REMOVE_QUANTITY'
+const SUBTRACT_QUANTITY = 'SUBTRACT_QUANTITY'
 const CHECKOUT = 'CHECKOUT'
 const CREATE_CART_ID = 'CREATE_CART_ID'
 const CLEAR_CART = 'CLEAR_CART'
@@ -30,6 +30,13 @@ const addItem = item => {
 const addQuantity = id => {
   return {
     type: ADD_QUANTITY,
+    id
+  }
+}
+
+const subtractQuantity = id => {
+  return {
+    type: SUBTRACT_QUANTITY,
     id
   }
 }
@@ -75,7 +82,9 @@ export const addCartItem = (itemId, userId, orderId) => async dispatch => {
     const body = {userId, itemId, orderId}
     const res = await axios.put(`/api/users/${userId}/orders/add-to-cart`, body)
     const cartId = res.data.id
-    dispatch(createCartId(cartId))
+    if (!orderId) {
+      dispatch(createCartId(cartId))
+    }
     if (data) {
       dispatch(addItem(data))
     } else {
@@ -86,17 +95,45 @@ export const addCartItem = (itemId, userId, orderId) => async dispatch => {
   }
 }
 
-export const addQuantityItem = id => dispatch => {
+export const addItemQuantity = (itemId, userId, orderId) => async dispatch => {
   try {
-    dispatch(addQuantity(id))
+    const body = {itemId, orderId}
+    const {data} = await axios.put(
+      `/api/users/${userId}/orders/increase-quantity`,
+      body
+    )
+    if (data) {
+      dispatch(addQuantity(itemId))
+    }
+  } catch (err) {
+    console.error(err)
+  }
+}
+export const subtractItemQuantity = (
+  itemId,
+  userId,
+  orderId
+) => async dispatch => {
+  try {
+    const body = {itemId, orderId}
+    const {data} = await axios.put(
+      `/api/users/${userId}/orders/decrease-quantity`,
+      body
+    )
+    if (data) {
+      dispatch(subtractQuantity(itemId))
+    }
   } catch (err) {
     console.error(err)
   }
 }
 
-export const deleteCartItem = id => dispatch => {
+export const deleteCartItem = (itemId, userId, orderId) => async dispatch => {
   try {
-    dispatch(removeItem(id))
+    await axios.delete(
+      `/api/users/${userId}/orders/${orderId}/${itemId}/remove-from-cart`
+    )
+    dispatch(removeItem(itemId))
   } catch (err) {
     console.error(err)
   }
@@ -150,8 +187,8 @@ export default function(state = initialState, action) {
         let newCart = state.cart.map(item => {
           if (item.id === itemToAdd.id) {
             item.quantity++
-            return item
           }
+          return item
         })
         return {...state, cart: newCart}
       } else {
@@ -167,14 +204,22 @@ export default function(state = initialState, action) {
       return {...state, cartId: action.cartId}
     case GET_USER_CART:
       return {...state, cart: action.cart.cart, cartId: action.cart.orderId}
-    // case ADD_QUANTITY:
-    //   let addedItem = state.cart.find(item=> item.id === action.id)
-    //   if (!addedItem) {
-    //     addedItem.quantity = 1
-    //   } else {
-    //     addedItem.quantity += 1
-    //   }
-    //   return {...state, cart: [...state.cart, addedItem]}
+    case ADD_QUANTITY:
+      let increasedCart = state.cart.map(item => {
+        if (item.id === action.id) {
+          item.quantity++
+        }
+        return item
+      })
+      return {...state, cart: increasedCart}
+    case SUBTRACT_QUANTITY:
+      let decreasedCart = state.cart.map(item => {
+        if (item.id === action.id) {
+          item.quantity--
+        }
+        return item
+      })
+      return {...state, cart: decreasedCart}
     case CLEAR_CART:
       return initialState
     default:
