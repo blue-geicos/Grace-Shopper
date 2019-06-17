@@ -3,67 +3,30 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout, clearCartThunk} from '../store'
+import UserNavbar from './userNavBar'
+import AppBar from '@material-ui/core/AppBar'
+import Tabs from '@material-ui/core/Tabs'
+import Tab from '@material-ui/core/Tab'
+import CssBaseline from '@material-ui/core/CssBaseline/CssBaseline'
 
-const Navbar = ({handleClick, isLoggedIn, firstName}) => (
+const Navbar = () => (
   <div>
-    <Link to="/home">
-      <h1>Grace Shopper</h1>
-    </Link>
-    <nav className="container">
-      <div className="allProductsNav">
-        <Link to="/items/all">All Products</Link>
-      </div>
-      <div className="userCartNav">
-        {isLoggedIn ? (
-          <div>
-            {/* The navbar will show these links after you log in */}
-
-            <h3>Welcome, {firstName}!</h3>
-            <a href="#" onClick={handleClick}>
-              Logout
-            </a>
-          </div>
-        ) : (
-          <div>
-            {/* The navbar will show these links before you log in */}
-            <h3>Welcome, Guest!</h3>
-            <Link to="/login">Login</Link>
-            <Link to="/signup">Sign Up</Link>
-          </div>
-        )}
-        <Link to="/cart">Cart</Link>
-      </div>
-    </nav>
-
-    <hr />
+    <CssBaseline />
+    <AppBar position="static">
+      <nav className="container">
+        <div className="allProductsNav">
+          <Tabs>
+            <Link to="/home">
+              <img src="logo.jpg.png" height="100" width="100" />
+            </Link>
+            <Tab label="View All" component={Link} to="/items/all" />
+            <Tab label="Special" component={Link} to="/items/specialOccasion" />
+          </Tabs>
+        </div>
+        <UserNavbar />
+      </nav>
+    </AppBar>
   </div>
 )
 
-/**
- * CONTAINER
- */
-const mapState = state => {
-  return {
-    isLoggedIn: !!state.user.id,
-    firstName: state.user.firstName
-  }
-}
-
-const mapDispatch = dispatch => {
-  return {
-    handleClick() {
-      dispatch(logout())
-      dispatch(clearCartThunk())
-    }
-  }
-}
-
-export default connect(mapState, mapDispatch)(Navbar)
-
-/**
- * PROP TYPES
- */
-Navbar.propTypes = {
-  handleClick: PropTypes.func.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired
-}
+export default Navbar
