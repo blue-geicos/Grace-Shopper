@@ -7,12 +7,14 @@ User.hasMany(Order)
 Order.belongsTo(User)
 Item.belongsToMany(Order, {through: OrderItems})
 Order.belongsToMany(Item, {through: OrderItems})
+OrderItems.belongsTo(Item)
+OrderItems.belongsTo(Order)
 
 // hooks
-OrderItems.addHook('afterUpdate', orderItemsInstance => {
+OrderItems.addHook('beforeUpdate', orderItemsInstance => {
   const item = Item.findByPk(orderItemsInstance.itemId)
-  if (orderItemsInstance.quantity > item.stock) {
-    orderItemsInstance.quantity = item.stock
+  if (orderItemsInstance.quantity > item.stock - 1) {
+    orderItemsInstance.quantity = item.stock - 1
   }
   return orderItemsInstance
 })
@@ -29,7 +31,7 @@ Order.prototype.getOrderWithItemsAndQuantities = async function() {
     const itemQuant = orderItems.dataValues.quantity
     const itemId = orderItems.dataValues.itemId
     const itemObj = await Item.findByPk(itemId, {
-      attributes: ['id', 'name', 'description', 'price', 'imageUrl']
+      attributes: ['id', 'name', 'description', 'price', 'imageUrl', 'stock']
     })
     return {...itemObj.dataValues, quantity: itemQuant}
   })
