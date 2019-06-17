@@ -15,7 +15,16 @@ const Item = db.define('items', {
   category: {
     type: Sequelize.STRING,
     validate: {
-      isIn: [['Get Well', 'Congrats', 'Special Occasions']]
+      isIn: [
+        [
+          'Get Well',
+          'Housewarming',
+          'Date Night',
+          'Self Care',
+          'Congrats',
+          'Special Occasions'
+        ]
+      ]
     }
   },
   imageUrl: {

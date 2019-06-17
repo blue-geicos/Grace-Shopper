@@ -16,7 +16,7 @@ import Grid from '@material-ui/core/Grid'
 
 const useStyles = makeStyles({
   card: {
-    width: 350
+    width: 375
   },
   media: {
     height: 325
@@ -27,7 +27,7 @@ const useStylesGrid = makeStyles(theme => ({
   container: {
     display: 'grid',
     gridTemplateColumns: 'repeat(12, 1fr)',
-    gridGap: theme.spacing(3)
+    gridGap: theme.spacing(5)
   }
 }))
 
@@ -36,9 +36,9 @@ export const AllItems = props => {
   const gridClasses = useStylesGrid()
 
   return (
-    <div>
+    <div id="all-items">
       <h1>All Items</h1>
-      <Grid container spacing={3}>
+      <Grid container spacing={5}>
         {props.items.map(item => (
           <div key={item.id}>
             <Grid item>

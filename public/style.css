@@ -3,6 +3,11 @@ body {
   color: black;
 }
 
+#all-items {
+  padding: 25px;
+  justify-content: center;
+}
+
 .homeImage {
   position: relative;
   z-index: 0;
