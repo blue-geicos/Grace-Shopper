@@ -5,6 +5,7 @@ import CardContent from '@material-ui/core/CardContent'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import {ButtonGroup} from '@material-ui/core'
+import {Link} from 'react-router-dom'
 
 const useStyles = makeStyles({
   card: {
@@ -24,7 +25,12 @@ const useStyles = makeStyles({
   }
 })
 
-export default function CartSummary({handleCheckout, cartId, userId}) {
+export default function CartSummary({
+  handleCheckout,
+  cartId,
+  userId,
+  subtotal
+}) {
   const classes = useStyles()
 
   return (
@@ -32,20 +38,19 @@ export default function CartSummary({handleCheckout, cartId, userId}) {
       <CardContent>
         <div className={classes.subtotalContainer}>
           <Typography component="h2">Subtotal</Typography>
-          <Typography component="h2">
-            $ 99
-            {/* {subtotal / 100} */}
-          </Typography>
+          <Typography component="h2">${subtotal}</Typography>
         </div>
         <Typography variant="body2" component="p">
           Shipping and taxes calculated at checkout
         </Typography>
       </CardContent>
-      <ButtonGroup fullWidth color="primary" variant="contained">
-        <Button size="small" onClick={() => handleCheckout(cartId, userId)}>
-          checkout
-        </Button>
-      </ButtonGroup>
+      <Link to="/checkout">
+        <ButtonGroup fullWidth color="primary" variant="contained">
+          <Button size="small" onClick={() => handleCheckout(cartId, userId)}>
+            checkout
+          </Button>
+        </ButtonGroup>
+      </Link>
     </Card>
   )
 }

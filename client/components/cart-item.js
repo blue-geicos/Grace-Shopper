@@ -74,7 +74,7 @@ export default function CartItem({item, handleEditItem}) {
           <p>{item.description}</p>
         </div>
       </div>
-      <h4>${item.price / 100 * item.quantity}</h4>
+      <h4>${item.price * item.quantity / 100}</h4>
     </div>
   )
 }
