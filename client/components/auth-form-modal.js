@@ -26,6 +26,16 @@ const AuthFormModal = props => {
     setOpen(false)
   }
 
+  const actions = [
+    <FlatButton label="Close" primary={true} onTouchTap={handleClose} />,
+    <FlatButton
+      label="Submit"
+      primary={true}
+      type="submit"
+      onTouchTap={handleSubmit}
+    />
+  ]
+
   return (
     <div>
       <form onSubmit={handleSubmit} name={name}>
@@ -149,9 +159,6 @@ const AuthFormModal = props => {
           </div>
         )}
 
-        <div>
-          <button type="submit">{displayName}</button>
-        </div>
         {error && error.response && <div> {error.response.data} </div>}
       </form>
       <a href="/auth/google">{displayName} with Google</a>
@@ -188,6 +195,7 @@ const mapDispatch = dispatch => {
   return {
     handleSubmit(evt) {
       evt.preventDefault()
+      console.log()
       const formName = evt.target.name
       const email = evt.target.email.value
       const password = evt.target.password.value
