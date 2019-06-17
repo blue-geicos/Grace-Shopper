@@ -1,5 +1,23 @@
 body {
-  font-family: sans-serif;
+  font-family: 'Open Sans Condensed', sans-serif;
+  color: black;
+}
+
+.homeImage {
+  position: relative;
+  z-index: 0;
+  background-size: 100% auto;
+  background-position: center center;
+  background-repeat: no-repeat;
+  height: 66.666vw;
+  transform-origin: center bottom 0px;
+}
+
+.homeImageText {
+  position: absolute;
+  text-align: center;
+  color: #ff1744;
+  font-size: 65px;
 }
 
 a {
@@ -12,7 +30,9 @@ label {
 
 nav a {
   display: inline-block;
-  margin: 1em;
+  /* margin: 0.05em; */
+  color: black;
+  text-align: center;
 }
 
 form div {
@@ -23,6 +43,9 @@ form div {
 .container {
   display: flex;
   justify-content: space-between;
+  background-color: white;
+  color: black;
+  padding: 0px 0.1px 0.1px 0px;
 }
 
 .userCartNav {
@@ -30,7 +53,6 @@ form div {
   justify-content: space-around;
   flex-grow: 0.3;
 }
-
 .cart-items-title {
   display: flex;
   justify-content: space-between;
@@ -51,4 +73,18 @@ form div {
 
 .cart-empty {
   text-align: center;
+.guest {
+  text-align: center;
+  align-content: space-around;
+}
+
+.allProductsNav {
+  justify-content: center;
+  font-size: 15px;
+}
+
+.homePageCard {
+  display: flex;
+  justify-content: space-around;
+  margin: 5em;
 }
