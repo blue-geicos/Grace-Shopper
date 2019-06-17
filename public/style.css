@@ -1,5 +1,5 @@
 body {
-  font-family: 'Open Sans Condensed', sans-serif;
+  font-family: 'Noto Sans HK', sans-serif;
   color: black;
 }
 
@@ -14,10 +14,9 @@ body {
 }
 
 .homeImageText {
-  position: absolute;
   text-align: center;
-  color: #ff1744;
-  font-size: 65px;
+  color: black;
+  font-size: 30px;
 }
 
 a {
@@ -28,11 +27,12 @@ label {
   display: block;
 }
 
-nav a {
+nav {
   display: inline-block;
   /* margin: 0.05em; */
   color: black;
   text-align: center;
+  font: 'Noto Sans HK';
 }
 
 form div {
@@ -82,6 +82,8 @@ form div {
 .allProductsNav {
   justify-content: center;
   font-size: 15px;
+
+  font: 'Noto Sans HK';
 }
 
 .homePageCard {
