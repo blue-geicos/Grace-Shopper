@@ -5,8 +5,7 @@ import axios from 'axios'
 // initial state
 const initialState = {
   cart: [],
-  cartId: undefined,
-  successfulCheckout: undefined
+  cartId: undefined
 }
 
 //Action
@@ -49,10 +48,9 @@ const removeItem = id => {
   }
 }
 
-const checkout = successfulCheckout => {
+const checkout = () => {
   return {
-    type: CHECKOUT,
-    successfulCheckout
+    type: CHECKOUT
   }
 }
 
@@ -213,8 +211,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         cart: [],
-        cartId: undefined,
-        successfulCheckout: action.successfulCheckout
+        cartId: undefined
       }
     case CREATE_CART_ID:
       return {...state, cartId: action.cartId}
