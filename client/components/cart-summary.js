@@ -38,7 +38,7 @@ export default function CartSummary({
       <CardContent>
         <div className={classes.subtotalContainer}>
           <Typography component="h2">Subtotal</Typography>
-          <Typography component="h2">${subtotal}</Typography>
+          <Typography component="h2">${subtotal / 100}</Typography>
         </div>
         <Typography variant="body2" component="p">
           Shipping and taxes calculated at checkout
@@ -46,7 +46,10 @@ export default function CartSummary({
       </CardContent>
       <Link to="/checkout">
         <ButtonGroup fullWidth color="primary" variant="contained">
-          <Button size="small" onClick={() => handleCheckout(cartId, userId)}>
+          <Button
+            size="small"
+            onClick={() => handleCheckout(cartId, userId, subtotal)}
+          >
             checkout
           </Button>
         </ButtonGroup>

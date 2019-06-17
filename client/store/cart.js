@@ -139,18 +139,27 @@ export const deleteCartItem = (itemId, userId, orderId) => async dispatch => {
   }
 }
 
-export const guestCheckout = cart => async dispatch => {
+export const guestCheckout = (cart, total) => async dispatch => {
   try {
-    await axios.post('/api/users/guest/orders/guest-checkout', cart)
+    const body = {cart, total}
+    const {data} = await axios.post(
+      '/api/users/guest/orders/guest-checkout',
+      body
+    )
+    console.log('receipt url', data)
     dispatch(checkout())
   } catch (err) {
     console.error(err)
   }
 }
 
-export const userCheckout = (orderId, userId) => async dispatch => {
+export const userCheckout = (orderId, userId, total) => async dispatch => {
   try {
-    await axios.put(`/api/users/${userId}/orders/checkout`, {orderId})
+    const {data} = await axios.put(`/api/users/${userId}/orders/checkout`, {
+      orderId,
+      total
+    })
+    console.log('receipt url', data)
     dispatch(checkout())
   } catch (err) {
     console.error(err)

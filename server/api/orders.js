@@ -1,22 +1,39 @@
 const router = require('express').Router()
 const {Order, Item, OrderItems, User} = require('../db/models')
+const stripe = require('stripe')('sk_test_3MqEsoZA2HE6pwnsmxjm9THC00FyxlBCmp')
 
 module.exports = router
 
 router.put('/checkout', async (req, res, next) => {
   try {
     const orderToUpdate = await Order.findByPk(req.body.orderId)
-    const placedOrder = await orderToUpdate.update(
+    const amount = req.body.total
+
+    stripe.charges.create(
       {
-        cartMode: false
+        amount: amount,
+        currency: 'usd',
+        source: 'tok_visa'
       },
-      {
-        where: {id: req.body.id},
-        returning: true,
-        plain: true
+      async (err, charge) => {
+        if (err) {
+          console.error(err)
+          res.send('error')
+        } else {
+          await orderToUpdate.update(
+            {
+              cartMode: false
+            },
+            {
+              where: {id: req.body.id},
+              returning: true,
+              plain: true
+            }
+          )
+          res.json(charge.receipt_url)
+        }
       }
     )
-    res.json(placedOrder[1])
   } catch (err) {
     next(err)
   }
@@ -24,23 +41,39 @@ router.put('/checkout', async (req, res, next) => {
 
 router.post('/guest-checkout', async (req, res, next) => {
   try {
-    const guestOrder = await Order.create({
-      cartMode: false
-    })
-    req.body.map(async cartItem => {
-      const itemInfo = await Item.findByPk(cartItem.id)
-      await guestOrder.addItem(itemInfo)
-      const orderItemToUpdate = await OrderItems.findOne({
-        where: {
-          itemId: cartItem.id,
-          orderId: guestOrder.id
+    const amount = req.body.total
+
+    stripe.charges.create(
+      {
+        amount: amount,
+        currency: 'usd',
+        source: 'tok_visa'
+      },
+      async (err, charge) => {
+        if (err) {
+          console.error(err)
+          res.send('error')
+        } else {
+          const guestOrder = await Order.create({
+            cartMode: false
+          })
+          req.body.cart.map(async cartItem => {
+            const itemInfo = await Item.findByPk(cartItem.id)
+            await guestOrder.addItem(itemInfo)
+            const orderItemToUpdate = await OrderItems.findOne({
+              where: {
+                itemId: cartItem.id,
+                orderId: guestOrder.id
+              }
+            })
+            await orderItemToUpdate.update({
+              quantity: cartItem.quantity
+            })
+          })
+          res.json(charge.receipt_url)
         }
-      })
-      await orderItemToUpdate.update({
-        quantity: cartItem.quantity
-      })
-    })
-    res.json(guestOrder)
+      }
+    )
   } catch (err) {
     console.error(err)
   }

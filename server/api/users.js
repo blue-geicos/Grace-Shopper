@@ -21,4 +21,6 @@ router.param('id', (req, res, next, id) => {
   next()
 })
 
+router.use('/guest/orders', require('./orders'))
+
 router.use('/:id/orders', require('./orders'))
