@@ -2,8 +2,6 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {
   deleteCartItem,
-  guestCheckout,
-  userCheckout,
   getUserCartThunk,
   addItemQuantity,
   subtractItemQuantity
@@ -38,7 +36,7 @@ class Cart extends Component {
     let subtotal = 0
     return (
       <div>
-        <h1 className="cart-title">Shopping Cart</h1>
+        <h1 className="page-title">Shopping Cart</h1>
         {cart.length ? (
           <div className="cart-checkout-container">
             <div className="cart-item-container">

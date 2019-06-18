@@ -3,11 +3,11 @@ const initialState = {
   shipping: {}
 }
 
-// Actions
+// ACTION TYPES
 const ADD_CARD_INFO = 'ADD_CARD_INFO'
 const ADD_SHIPPING_INFO = 'ADD_SHIPPING_INFO'
 
-// Action Creator
+// ACTION CREATORS
 export const addCardInfo = cardInfo => ({
   type: ADD_CARD_INFO,
   cardInfo
@@ -18,7 +18,7 @@ export const addShippingInfo = shippingInfo => ({
   shippingInfo
 })
 
-// Reducer
+// REDUCER
 export default function(state = initialState, action) {
   switch (action.type) {
     case ADD_CARD_INFO:

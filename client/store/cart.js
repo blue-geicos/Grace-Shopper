@@ -2,13 +2,13 @@
 /* eslint-disable no-case-declarations */
 import axios from 'axios'
 
-// initial state
+// INITIAL STATE
 const initialState = {
   cart: [],
   cartId: undefined
 }
 
-//Action
+// ACTION TYPES
 const ADD_CART_ITEM = 'ADD_CART_ITEM'
 const REMOVE_CART_ITEM = 'REMOVE_CART_ITEM'
 const ADD_QUANTITY = 'ADD_QUANTITY'
@@ -18,8 +18,7 @@ const CREATE_CART_ID = 'CREATE_CART_ID'
 const CLEAR_CART = 'CLEAR_CART'
 const GET_USER_CART = 'GET_USER_CART'
 
-//Action Creator
-
+// ACTION CREATORS
 const addItem = item => {
   return {
     type: ADD_CART_ITEM,
@@ -74,8 +73,7 @@ const getUserCart = cart => {
   }
 }
 
-// Thunk Creator
-
+// THUNK CREATOR
 export const addCartItem = (itemId, userId, orderId) => async dispatch => {
   try {
     const {data} = await axios.get(`/api/items/${itemId}`)
@@ -185,6 +183,7 @@ export const getUserCartThunk = userId => async dispatch => {
   }
 }
 
+// REDUCER
 export default function(state = initialState, action) {
   switch (action.type) {
     case ADD_CART_ITEM:

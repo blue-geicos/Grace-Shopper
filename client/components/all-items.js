@@ -1,5 +1,4 @@
 import React from 'react'
-// import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 
@@ -26,13 +25,11 @@ export const AllItems = props => {
 
   return (
     <div>
-      <h3>All Items</h3>
+      <h1 className="page-title">All Items</h1>
       <br />
       <div id="all-items">
-        {/* <Grid container spacing={5}> */}
         {props.items.map(item => (
           <div key={item.id} className="all-view">
-            {/* <Grid item className={gridClasses}> */}
             <Link to={`/items/${item.id}`}>
               <Card className={classes.card}>
                 <CardActionArea>
@@ -61,10 +58,8 @@ export const AllItems = props => {
                 </CardActionArea>
               </Card>
             </Link>
-            {/* </Grid> */}
           </div>
         ))}
-        {/* </Grid> */}
       </div>
     </div>
   )

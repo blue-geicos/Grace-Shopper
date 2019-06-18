@@ -1,39 +1,17 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+
 import {connect} from 'react-redux'
-import Button from '@material-ui/core/Button'
-import Card from '@material-ui/core/Card'
-import CardActionArea from '@material-ui/core/CardActionArea'
-import CardActions from '@material-ui/core/CardActions'
-import CardContent from '@material-ui/core/CardContent'
-import CardMedia from '@material-ui/core/CardMedia'
-import Typography from '@material-ui/core/Typography'
-import {makeStyles} from '@material-ui/core/styles'
 import BottomNavigation from '@material-ui/core/BottomNavigation'
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction'
-import Icon from '@material-ui/core/Icon'
 import RestoreIcon from '@material-ui/icons/Restore'
 import FavoriteIcon from '@material-ui/icons/Favorite'
 import LocationOnIcon from '@material-ui/icons/LocationOn'
-import Hidden from '@material-ui/core/Hidden'
 
 /**
  * COMPONENT
  */
-const useStyles = makeStyles({
-  card: {
-    display: 'flex',
-    maxWidth: 345
-  },
-  cardDetails: {
-    flex: 1
-  },
-  root: {
-    width: 1400
-  }
-})
+
 export const UserHome = () => {
-  const classes = useStyles()
   return (
     <div className="homeImage">
       <div className="homeImageText">
@@ -53,7 +31,6 @@ export const UserHome = () => {
           you care! We have a package for every occasion. All packages are made
           to order and shipped with love.
         </p>
-
         <h1>Meet The Founders</h1>
         <div className="info">
           <div>
@@ -94,7 +71,7 @@ export const UserHome = () => {
           </div>
         </div>
       </div>
-      <BottomNavigation className={classes.root}>
+      <BottomNavigation width={1}>
         <BottomNavigationAction
           label="Recents"
           value="recents"
