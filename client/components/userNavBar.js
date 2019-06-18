@@ -13,9 +13,9 @@ const UserNavbar = ({handleClick, isLoggedIn, firstName}) => (
       <div>
         <h3>Welcome, {firstName}!</h3>
 
-        <a href="#" onClick={handleClick}>
+        <Tab label="Logout" component={Link} to="/home" onClick={handleClick}>
           Logout
-        </a>
+        </Tab>
       </div>
     ) : (
       <div className="guest">
