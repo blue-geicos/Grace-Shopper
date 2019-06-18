@@ -16,6 +16,7 @@ import Review from './review'
 import {addShippingInfo, addCardInfo} from '../../store/checkout'
 import {connect} from 'react-redux'
 import {guestCheckout, userCheckout} from '../../store'
+import {UserHome} from '..'
 
 function MadeWithLove() {
   return (
@@ -89,6 +90,8 @@ function useStepContent(step) {
       }
     case 2:
       return {formInfo, Component: <Review />, setFormInfo}
+    case 3:
+      return {formInfo, Component: <UserHome />, setFormInfo}
     default:
       throw new Error('Unknown step')
   }
