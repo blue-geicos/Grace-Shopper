@@ -1,18 +1,16 @@
 import axios from 'axios'
 
-// initial state
+// INITIAL STATE
 const initialState = {
   all: [],
   singleItem: {}
 }
 
-// action
-
+// ACTION TYPE
 const GOT_ITEMS = 'GOT_ITEMS'
 const SINGLE_ITEM = 'SINGLE_ITEM'
 
-// action creator
-
+// ACTION CREATORS
 const gotItems = items => ({
   type: GOT_ITEMS,
   items
@@ -23,8 +21,7 @@ const getOneItem = item => ({
   item
 })
 
-// thunk
-
+// THUNK CREATORS
 export const fetchItems = () => async dispatch => {
   try {
     const {data} = await axios.get('/api/items/all')
@@ -51,8 +48,7 @@ export const fetchSingleItem = id => async dispatch => {
   }
 }
 
-// reducer
-
+// REDUCER
 export default function(state = initialState, action) {
   switch (action.type) {
     case GOT_ITEMS:

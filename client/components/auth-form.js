@@ -78,7 +78,6 @@ const AuthForm = props => {
                   label="First Name"
                   name="firstName"
                   autoFocus
-                  // autoComplete="email"
                 />
                 <TextField
                   variant="outlined"
@@ -88,7 +87,6 @@ const AuthForm = props => {
                   id="lastName"
                   label="Last Name"
                   name="lastName"
-                  // autoComplete="email"
                 />
                 <TextField
                   variant="outlined"
@@ -98,7 +96,6 @@ const AuthForm = props => {
                   id="email"
                   label="Email"
                   name="email"
-                  // autoComplete="email"
                 />
                 <TextField
                   variant="outlined"
@@ -109,7 +106,6 @@ const AuthForm = props => {
                   label="Password"
                   type="password"
                   id="password"
-                  // autoComplete="current-password"
                 />
 
                 <Button
@@ -119,7 +115,7 @@ const AuthForm = props => {
                   color="primary"
                   className={classes.submit}
                 >
-                  Sign In
+                  Sign Up
                 </Button>
                 <Grid container>
                   <Grid item xs>
@@ -142,7 +138,7 @@ const AuthForm = props => {
                 <LockOutlinedIcon />
               </Avatar>
               <Typography component="h1" variant="h5">
-                Sign in
+                Log in
               </Typography>
               <form
                 name="login"
@@ -158,7 +154,6 @@ const AuthForm = props => {
                   id="email"
                   label="Email"
                   name="email"
-                  // autoComplete="email"
                 />
                 <TextField
                   variant="outlined"
@@ -169,7 +164,6 @@ const AuthForm = props => {
                   label="Password"
                   type="password"
                   id="password"
-                  // autoComplete="current-password"
                 />
                 <div className="formButton">
                   <Button
@@ -180,7 +174,7 @@ const AuthForm = props => {
                     className={classes.submit}
                     maxWidth="xs"
                   >
-                    Sign In
+                    Log In
                   </Button>
                 </div>
                 <Grid container>
@@ -204,13 +198,6 @@ const AuthForm = props => {
   )
 }
 
-/**
- * CONTAINER
- *   Note that we have two different sets of 'mapStateToProps' functions -
- *   one for Login, and one for Signup. However, they share the same 'mapDispatchToProps'
- *   function, and share the same Component. This is a good example of how we
- *   can stay DRY with interfaces that are very similar to each other!
- */
 const mapLogin = state => {
   return {
     name: 'login',

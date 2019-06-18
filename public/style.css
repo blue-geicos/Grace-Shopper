@@ -7,6 +7,47 @@ body {
   color: black;
 }
 
+a {
+  text-decoration: none;
+}
+
+label {
+  display: block;
+}
+
+nav {
+  display: inline-block;
+  color: black;
+  text-align: center;
+  font: 'Noto Sans HK';
+}
+
+.page-title {
+  text-align: center;
+}
+
+form div {
+  margin: 1em;
+  display: inline-block;
+}
+
+h1 {
+  color: lightcoral;
+}
+
+h3 {
+  color: grey;
+}
+
+h3 a {
+  color: grey;
+}
+
+h3 a:hover {
+  color: lightcoral;
+}
+
+/* HOME */
 .homeImage {
   position: relative;
   z-index: 0;
@@ -23,35 +64,30 @@ body {
   font-size: 30px;
 }
 
-a {
-  text-decoration: none;
+.homePageCard {
+  display: flex;
+  justify-content: space-around;
+  margin: 5em;
 }
 
-label {
-  display: block;
+.aboutUs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-nav {
-  display: inline-block;
-  /* margin: 0.05em; */
-  color: black;
+.info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 80%;
+}
+
+.text {
   text-align: center;
-  font: 'Noto Sans HK';
 }
 
-h1 {
-  color: lightcoral;
-}
-
-h3 {
-  color: grey;
-}
-
-form div {
-  margin: 1em;
-  display: inline-block;
-}
-
+/* NAV */
 .container {
   display: flex;
   justify-content: space-between;
@@ -60,19 +96,33 @@ form div {
   padding: 0px 0.1px 0.1px 0px;
 }
 
+.allProductsNav {
+  justify-content: center;
+  font-weight: bold;
+  font-size: 25px;
+  color: rgba(0, 0, 0, 0.9);
+  font: 'Noto Sans HK';
+}
+
+.allProductsNav:hover {
+  color: lightcoral;
+}
+
 .userCartNav {
   display: flex;
   justify-content: space-around;
   flex-grow: 0.3;
   color: rgba(0, 0, 0, 0.9);
 }
+
+.userCartNav a:hover {
+  color: lightcoral;
+}
+
+/* CART */
 .cart-items-title {
   display: flex;
   justify-content: space-between;
-}
-
-.cart-title {
-  text-align: center;
 }
 
 .cart-checkout-container {
@@ -87,25 +137,13 @@ form div {
 .cart-empty {
   text-align: center;
 }
+
 .guest {
   text-align: center;
   align-content: space-around;
 }
 
-.allProductsNav {
-  justify-content: center;
-  font-weight: bold;
-  font-size: 25px;
-  color: rgba(0, 0, 0, 0.9);
-  font: 'Noto Sans HK';
-}
-
-.homePageCard {
-  display: flex;
-  justify-content: space-around;
-  margin: 5em;
-}
-
+/* ALL ITEMS */
 #all-items {
   display: flex;
   justify-content: space-around;
@@ -120,6 +158,7 @@ form div {
   color: lightcoral;
 }
 
+/* SINGLE ITEM */
 .single-item {
   padding: 25px;
   text-align: center;
@@ -146,23 +185,7 @@ form div {
   flex: 2;
 }
 
-.aboutUs {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.info {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 80%;
-}
-
-.text {
-  text-align: center;
-}
-
+/* ERROR PAGE */
 .error-nav {
   text-transform: uppercase;
   text-align: center;
@@ -174,7 +197,7 @@ form div {
   color: lightslategrey;
 }
 
+/* FOOTER */
 #footer {
   width: 100%;
 }
-
