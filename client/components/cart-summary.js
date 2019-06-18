@@ -8,6 +8,11 @@ import {ButtonGroup} from '@material-ui/core'
 import {Link} from 'react-router-dom'
 
 const useStyles = makeStyles({
+  '@global': {
+    body: {
+      fontFamily: 'Noto Sans HK'
+    }
+  },
   card: {
     minWidth: 275,
     backgroundColor: '#f5f5f5'

@@ -1,5 +1,9 @@
+* {
+  font-family: 'Noto Sans HK', sans-serif;
+}
+
 body {
-  font-family: 'Open Sans Condensed', sans-serif;
+  font-family: 'Noto Sans HK', sans-serif;
   color: black;
 }
 
@@ -14,10 +18,9 @@ body {
 }
 
 .homeImageText {
-  position: absolute;
   text-align: center;
-  color: #ff1744;
-  font-size: 65px;
+  color: black;
+  font-size: 30px;
 }
 
 a {
@@ -28,11 +31,20 @@ label {
   display: block;
 }
 
-nav a {
+nav {
   display: inline-block;
   /* margin: 0.05em; */
   color: black;
   text-align: center;
+  font: 'Noto Sans HK';
+}
+
+h1 {
+  color: lightcoral;
+}
+
+h3 {
+  color: lightslategrey;
 }
 
 form div {
@@ -52,6 +64,7 @@ form div {
   display: flex;
   justify-content: space-around;
   flex-grow: 0.3;
+  color: grey;
 }
 .cart-items-title {
   display: flex;
@@ -82,6 +95,8 @@ form div {
 .allProductsNav {
   justify-content: center;
   font-size: 15px;
+  color: grey;
+  font: 'Noto Sans HK';
 }
 
 .homePageCard {
@@ -89,3 +104,47 @@ form div {
   justify-content: space-around;
   margin: 5em;
 }
+
+#all-items {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.all-view {
+  text-align: center;
+}
+
+.item-card-title {
+  color: lightcoral;
+}
+
+.single-item {
+  padding: 25px;
+  text-align: center;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  flex-grow: 5;
+}
+
+.single-item img {
+  display: block;
+  height: 100vh;
+  width: auto;
+  border-radius: 15px;
+  border: 5px, solid, lightcoral;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 6px 20px 0 rgba(0, 0, 0, 0.05);
+  flex: 3;
+}
+
+.single-item-desc {
+  align-content: start;
+  padding: 15px;
+  flex-direction: column;
+  flex: 2;
+}
+
+/* .single-desc p {
+  text-align: left
+} */

@@ -37,10 +37,12 @@ export const UserHome = () => {
   return (
     <div className="homeImage">
       <div className="homeImageText">
-        <h1>Give The Perfect Gift</h1>
+        <h1>
+          Give The Perfect Gift <i className="fas fa-heart" />{' '}
+        </h1>
       </div>
       <img
-        src="https://cdn.shopify.com/s/files/1/0943/2026/products/beautiful_care_package-6261_9f805014-7ecb-42d3-b713-fcca656dc577_1024x1024.jpg?v=1548644101"
+        src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/post-spring-editors-box-studio-ads-acq-sp18-rl-edited-select-3-1526066321.jpg?crop=1.00xw:0.753xh;0,0.0269xh&resize=480:*"
         height="75%"
         width="100%"
       />

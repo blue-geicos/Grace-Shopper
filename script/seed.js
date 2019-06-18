@@ -35,8 +35,8 @@ async function seed() {
 
   const items = await Promise.all([
     Item.create({
-      name: 'Candy Basket',
-      description: 'Really Yummy',
+      name: 'Hey there, sugar!',
+      description: 'For the candy lover you love',
       price: 4599,
       category: 'Special Occasions',
       imageUrl:
@@ -44,9 +44,9 @@ async function seed() {
       stock: 10
     }),
     Item.create({
-      name: 'Get Well Basket',
+      name: 'Get Well Soon',
       description: 'Feel better soon',
-      price: 6200,
+      price: 6299,
       category: 'Get Well',
       imageUrl:
         'https://www.gifttree.com/images/super/6774j_Get-Well-Medicine-Cabinet.jpg',
@@ -54,12 +54,41 @@ async function seed() {
     }),
     Item.create({
       name: 'Congrats',
-      description: 'Congratulations!',
+      description: `Premium champagne is paired with gourmet confections, making an ideal gift to send your congratulations and best wishes. Served up in a fleur-de-lis keepsake container, it's an elegant gift that is sure to surprise, delight and leave a lasting impression. Included in the basket: Chocolate Chip Cookies, Almonds, Dunlin California Brut Sparkling Wine, Cherry Sours, Peanut Brittle, Moet & Chandon Imperial Champagne, Olive Oil and Sea Salt Crostini d'Italia, and Roasted Cinnamon Maple Walnuts
+
+      `,
       price: 7999,
-      category: 'Congrats',
+      category: 'Special Occasions',
       imageUrl:
         'https://www.gifttree.com/images/super/5061bg_Champagne-Wishes-Gift-Basket.jpg',
       stock: 5
+    }),
+    Item.create({
+      name: `Treat Yo'self`,
+      description: 'Relax and self-care',
+      price: 3599,
+      category: 'Self Care',
+      imageUrl:
+        'https://www.gifttree.com/images/super/2143ai_Bath-and-Body-Invigoration.jpg',
+      stock: 10
+    }),
+    Item.create({
+      name: 'Welcome Home!',
+      description: 'Housewarming',
+      price: 5599,
+      category: 'Housewarming',
+      imageUrl:
+        'https://www.gifttree.com/images/gt_large/27262b_Welcome-Home-Coffee-For-Two.jpg',
+      stock: 10
+    }),
+    Item.create({
+      name: 'Netflix & Chill',
+      description: 'Date night inspiration',
+      price: 7599,
+      category: 'Date Night',
+      imageUrl:
+        'https://www.gifttree.com/images/super/6603bi_The-5th-Avenue-Wine-Gift-Basket.jpg',
+      stock: 10
     })
   ])
 

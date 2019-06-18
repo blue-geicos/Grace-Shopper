@@ -4,6 +4,11 @@ import IconButton from '@material-ui/core/IconButton'
 import Button from '@material-ui/core/Button'
 
 const useStyles = makeStyles(theme => ({
+  '@global': {
+    body: {
+      fontFamily: 'Noto Sans HK'
+    }
+  },
   button: {
     margin: theme.spacing(1),
     'font-size': '.75rem'
