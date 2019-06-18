@@ -22,13 +22,13 @@ class Cart extends Component {
     }
   }
 
-  handleEditItem = (itemId, editType) => {
+  handleEditItem = (itemId, itemStock, itemQuantity, editType) => {
     const {cartId, userId, addItem, subtractItem, deleteItem} = this.props
-    if (editType === 'add') {
+    if (editType === 'add' && itemQuantity < itemStock) {
       addItem(itemId, userId, cartId)
-    } else if (editType === 'subtract') {
+    } else if (editType === 'subtract' && itemQuantity > 1) {
       subtractItem(itemId, userId, cartId)
-    } else {
+    } else if (editType === 'remove') {
       deleteItem(itemId, userId, cartId)
     }
   }

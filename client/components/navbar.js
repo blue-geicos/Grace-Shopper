@@ -16,10 +16,9 @@ const Navbar = () => (
         <div className="allProductsNav">
           <Tabs>
             <Link to="/home">
-              <img src="logo.jpg.png" height="100" width="100" />
+              <img src="FMTY-Logo.png" height="100" width="100" />
             </Link>
             <Tab label="View All" component={Link} to="/items/all" />
-            <Tab label="Special" component={Link} to="/items/specialOccasion" />
           </Tabs>
         </div>
         <UserNavbar />

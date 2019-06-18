@@ -56,7 +56,9 @@ export default function CartItem({item, handleEditItem}) {
                 color="primary"
                 className={classes['quantity-button']}
                 aria-label="increase item quantity"
-                onClick={() => handleEditItem(item.id, 'add')}
+                onClick={() =>
+                  handleEditItem(item.id, item.stock, item.quantity, 'add')
+                }
               >
                 <i className="material-icons">arrow_drop_up</i>
               </IconButton>
@@ -64,14 +66,18 @@ export default function CartItem({item, handleEditItem}) {
                 color="primary"
                 className={classes['quantity-button']}
                 aria-label="decrease item quantity"
-                onClick={() => handleEditItem(item.id, 'subtract')}
+                onClick={() =>
+                  handleEditItem(item.id, item.stock, item.quantity, 'subtract')
+                }
               >
                 <i className="material-icons">arrow_drop_down</i>
               </IconButton>
             </div>
             <Button
               className={classes.button}
-              onClick={() => handleEditItem(item.id, 'remove')}
+              onClick={() =>
+                handleEditItem(item.id, item.stock, item.quantity, 'remove')
+              }
             >
               Remove
             </Button>
