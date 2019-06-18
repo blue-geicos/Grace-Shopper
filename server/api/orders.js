@@ -8,7 +8,7 @@ router.put('/checkout', async (req, res, next) => {
   try {
     const orderToUpdate = await Order.findByPk(req.body.orderId)
     const amount = req.body.total
-
+    console.log('orderToUpdate', orderToUpdate)
     stripe.charges.create(
       {
         amount: amount,
@@ -25,11 +25,11 @@ router.put('/checkout', async (req, res, next) => {
               cartMode: false
             },
             {
-              where: {id: req.body.id},
-              returning: true,
+              where: {id: req.body.orderId},
               plain: true
             }
           )
+
           res.json(charge.receipt_url)
         }
       }
@@ -101,7 +101,10 @@ router.put('/add-to-cart', async (req, res, next) => {
             orderId: order.id
           }
         })
-        const newQuantity = itemToUpdate.quantity + 1
+        const newQuantity =
+          itemToUpdate.quantity + 1 <= item.stock
+            ? itemToUpdate.quantity + 1
+            : item.stock
         await itemToUpdate.update({
           quantity: newQuantity
         })
@@ -126,7 +129,10 @@ router.put('/increase-quantity', async (req, res, next) => {
         orderId: req.body.orderId
       }
     })
-    const newQuantity = itemToUpdate.quantity + 1
+    const newQuantity =
+      itemToUpdate.quantity + 1 <= itemToUpdate.stock
+        ? itemToUpdate.quantity + 1
+        : itemToUpdate.stock
     await itemToUpdate.update({
       quantity: newQuantity
     })
@@ -144,7 +150,8 @@ router.put('/decrease-quantity', async (req, res, next) => {
         orderId: req.body.orderId
       }
     })
-    const newQuantity = itemToUpdate.quantity - 1
+    const newQuantity =
+      itemToUpdate.quantity > 1 ? itemToUpdate.quantity - 1 : 1
     await itemToUpdate.update({
       quantity: newQuantity
     })

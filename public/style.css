@@ -44,7 +44,7 @@ h1 {
 }
 
 h3 {
-  color: lightslategrey;
+  color: grey;
 }
 
 form div {
@@ -55,7 +55,7 @@ form div {
 .container {
   display: flex;
   justify-content: space-between;
-  background-color: white;
+  background-color: #f7ece1;
   color: black;
   padding: 0px 0.1px 0.1px 0px;
 }
@@ -64,7 +64,7 @@ form div {
   display: flex;
   justify-content: space-around;
   flex-grow: 0.3;
-  color: grey;
+  color: rgba(0, 0, 0, 0.9);
 }
 .cart-items-title {
   display: flex;
@@ -94,8 +94,9 @@ form div {
 
 .allProductsNav {
   justify-content: center;
-  font-size: 15px;
-  color: grey;
+  font-weight: bold;
+  font-size: 25px;
+  color: rgba(0, 0, 0, 0.9);
   font: 'Noto Sans HK';
 }
 
@@ -145,6 +146,23 @@ form div {
   flex: 2;
 }
 
+.aboutUs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 80%;
+}
+
+.text {
+  text-align: center;
+}
+
 .error-nav {
   text-transform: uppercase;
   text-align: center;
@@ -159,3 +177,4 @@ form div {
 #footer {
   width: 100%;
 }
+
