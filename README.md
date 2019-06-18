@@ -2,7 +2,7 @@
 
 # Welcome!
 
-Welcome to our site! From Me To You® is the modern day gift basket. It's the easy way to gift fun and unique care packages for all occasions with a few clicks.
+Welcome to our site! From Me To You, is a fully-functional e-commerce where you can buy personalized care packages. From Me To You® is the modern day gift basket. It's the easy way to gift fun and unique care packages for all occasions with a few clicks. This website was built using Sequelize, Express, Node.js, React, Redux and Material-UI by Taylor Thompson, Colleen Higgins and Audra Kenney.
 
 ## Visit
 
