@@ -46,12 +46,7 @@ export default function CartSummary({
       </CardContent>
       <Link to="/checkout">
         <ButtonGroup fullWidth color="primary" variant="contained">
-          <Button
-            size="small"
-            onClick={() => handleCheckout(cartId, userId, subtotal)}
-          >
-            checkout
-          </Button>
+          <Button size="small">checkout</Button>
         </ButtonGroup>
       </Link>
     </Card>

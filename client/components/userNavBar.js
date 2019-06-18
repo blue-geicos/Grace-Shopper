@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom'
 import {logout, clearCartThunk} from '../store'
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
+import Icon from '@material-ui/core/Icon'
 
 const UserNavbar = ({handleClick, isLoggedIn, firstName}) => (
   <div className="userCartNav">
@@ -27,7 +27,7 @@ const UserNavbar = ({handleClick, isLoggedIn, firstName}) => (
       </div>
     )}
     <Tab
-      icon={<ShoppingCartIcon />}
+      icon={<Icon>shopping_cart</Icon>}
       aria-label="Cart"
       component={Link}
       to="/cart"

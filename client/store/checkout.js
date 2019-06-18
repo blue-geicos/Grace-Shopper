@@ -26,11 +26,11 @@ export default function(state = initialState, action) {
         ...state,
         card: {
           ...action.cardInfo,
-          number: `xxxx-xxxx-xxxx-${action.cardInfo.number}`
+          cardNumber: `xxxx-xxxx-xxxx-${action.cardInfo.cardNumber.slice(11)}`
         }
       }
     case ADD_SHIPPING_INFO:
-      return {...state, shipping: action.shipping}
+      return {...state, shipping: action.shippingInfo}
     default:
       return state
   }
