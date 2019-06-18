@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const {Order, Item, OrderItems, User} = require('../db/models')
-const stripe = require('stripe')('sk_test_3MqEsoZA2HE6pwnsmxjm9THC00FyxlBCmp')
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 
 module.exports = router
 
