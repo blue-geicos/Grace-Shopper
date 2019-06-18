@@ -42,7 +42,7 @@ export const UserHome = () => {
         </h1>
       </div>
       <img
-        src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/post-spring-editors-box-studio-ads-acq-sp18-rl-edited-select-3-1526066321.jpg?crop=1.00xw:0.753xh;0,0.0269xh&resize=480:*"
+        src="https://www.lakechamplainchocolates.com/media/wysiwyg/build-your-own-gift-basket.jpg"
         height="75%"
         width="100%"
       />
