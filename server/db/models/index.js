@@ -35,6 +35,7 @@ Order.prototype.getOrderWithItemsAndQuantities = async function() {
     })
     return {...itemObj.dataValues, quantity: itemQuant}
   })
+
   return Promise.all(itemsArray).then(cart => {
     return {cart, orderId}
   })

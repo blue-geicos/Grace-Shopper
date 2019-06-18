@@ -9,7 +9,8 @@ import {
   AllItems,
   SingleItem,
   Cart,
-  Checkout
+  Checkout,
+  ErrorPage
 } from './components'
 import {me, fetchItems} from './store'
 
@@ -34,6 +35,8 @@ class Routes extends Component {
         <Route path="/signup" component={Signup} />
         <Route path="/home" component={UserHome} />
         <Route path="/checkout" component={Checkout} />
+        <Route path="/error" component={ErrorPage} />
+        <Route component={ErrorPage} />
 
         {isLoggedIn && (
           <Switch>
