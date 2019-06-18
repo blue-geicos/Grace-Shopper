@@ -42,57 +42,57 @@ export const UserHome = () => {
         </h1>
       </div>
       <img
-        src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/post-spring-editors-box-studio-ads-acq-sp18-rl-edited-select-3-1526066321.jpg?crop=1.00xw:0.753xh;0,0.0269xh&resize=480:*"
+        src="https://www.lakechamplainchocolates.com/media/wysiwyg/build-your-own-gift-basket.jpg"
         height="75%"
         width="100%"
       />
+      <div className="aboutUs">
+        <h1>About Us</h1>
+        <p>
+          From Me To You, is a convienent unique way to show someone how much
+          you care! We have a package for every occasion. All packages are made
+          to order and shipped with love.
+        </p>
 
-      <div className="homePageCard">
-        <Card className={classes.card}>
-          <CardActionArea>
-            <CardMedia
-              component="img"
-              alt="Gift Box"
-              height="140"
-              image="https://cdn.shopify.com/s/files/1/0607/3169/products/IMG_1350_300x300.JPG?v=1550728967"
-              title="image one"
-            />
-
-            <CardContent className={classes.cardDetails}>
-              <Typography gutterBottom variant="h5" component="h2">
-                Best Sellers
-              </Typography>
-              <Typography variant="body2" color="textSecondary" component="p">
-                View this months best selling packages!
-              </Typography>
-            </CardContent>
-          </CardActionArea>
-          <CardActions>
-            <Button size="small">View More</Button>
-          </CardActions>
-        </Card>
-        <Card className={classes.card}>
-          <CardActionArea>
-            <Hidden xsDown>
-              <CardMedia
-                component="img"
-                alt="Gift Box"
-                height="140"
-                image="https://static.wixstatic.com/media/ccd6ee_2fed0eedba8c4428b27e39d22b1cdaf9~mv2.jpg/v1/fit/w_498,h_484,q_90/file.jpg"
-                title="image two"
-              />
-            </Hidden>
-            <CardContent className={classes.cardDetails}>
-              <Typography gutterBottom variant="h5" component="h2">
-                Build Your Own
-              </Typography>
-              <Typography>Craft a more personalized care package.</Typography>
-            </CardContent>
-          </CardActionArea>
-          <CardActions>
-            <Button size="small">View More</Button>
-          </CardActions>
-        </Card>
+        <h1>Meet The Founders</h1>
+        <div className="info">
+          <div>
+            <h3>
+              <a href="https://www.linkedin.com/in/colleenjoyhiggins/">
+                Colleen Higgins
+              </a>
+            </h3>
+            <div className="text">
+              <p>Loves Dogs</p>
+              <p>Loves Climbing</p>
+              <p>Hates the Beach</p>
+            </div>
+          </div>
+          <div>
+            <h3>
+              <a href="https://www.linkedin.com/in/audra-kenney-b1b2528/">
+                Audra K. Kenney
+              </a>
+            </h3>
+            <div className="text">
+              <p>Loves React </p>
+              <p>Loves Cookies</p>
+              <p>Hates React</p>
+            </div>
+          </div>
+          <div>
+            <h3>
+              <a href="https://www.linkedin.com/in/taylor-alexandria-thompson/">
+                Taylor Thompson
+              </a>
+            </h3>
+            <div className="text">
+              <p>Loves Beach</p>
+              <p>Loves Cooking</p>
+              <p>Hates the subway </p>
+            </div>
+          </div>
+        </div>
       </div>
       <BottomNavigation className={classes.root}>
         <BottomNavigationAction

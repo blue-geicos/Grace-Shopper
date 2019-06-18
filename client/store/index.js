@@ -5,8 +5,9 @@ import {composeWithDevTools} from 'redux-devtools-extension'
 import user from './user'
 import items from './items'
 import cart from './cart'
+import checkout from './checkout'
 
-const reducer = combineReducers({items, user, cart})
+const reducer = combineReducers({items, user, cart, checkout})
 
 const persistedState = localStorage.getItem('reduxState')
   ? JSON.parse(localStorage.getItem('reduxState'))
@@ -24,3 +25,4 @@ export default store
 export * from './user'
 export * from './items'
 export * from './cart'
+export * from './checkout'

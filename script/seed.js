@@ -36,7 +36,8 @@ async function seed() {
   const items = await Promise.all([
     Item.create({
       name: 'Hey there, sugar!',
-      description: 'For the candy lover you love',
+      description:
+        'For the candy lover you love! This basket contains skittles, oreos, bubble gum, jelly beans, pop rocks, nerds, lollipops, bottlcaps',
       price: 4599,
       category: 'Special Occasions',
       imageUrl:
@@ -45,7 +46,8 @@ async function seed() {
     }),
     Item.create({
       name: 'Get Well Soon',
-      description: 'Feel better soon',
+      description:
+        'Send this basket to a friend that is feeling under the weather. This basket contains tea, cough drops, jelly beans, first aid kit, soup, water, ice pack and pistachios. Packaged uniquely in a first aid kit that is perfect for future storage ',
       price: 6299,
       category: 'Get Well',
       imageUrl:
@@ -54,18 +56,17 @@ async function seed() {
     }),
     Item.create({
       name: 'Congrats',
-      description: `Premium champagne is paired with gourmet confections, making an ideal gift to send your congratulations and best wishes. Served up in a fleur-de-lis keepsake container, it's an elegant gift that is sure to surprise, delight and leave a lasting impression. Included in the basket: Chocolate Chip Cookies, Almonds, Dunlin California Brut Sparkling Wine, Cherry Sours, Peanut Brittle, Moet & Chandon Imperial Champagne, Olive Oil and Sea Salt Crostini d'Italia, and Roasted Cinnamon Maple Walnuts
-
-      `,
+      description: `Premium champagne is paired with gourmet confections, making an ideal gift to send your congratulations and best wishes. Served up in a fleur-de-lis keepsake container, it's an elegant gift that is sure to surprise, delight and leave a lasting impression. Included in the basket: Chocolate Chip Cookies, Almonds, Dunlin California Brut Sparkling Wine, Cherry Sours, Peanut Brittle, Moet & Chandon Imperial Champagne, Olive Oil and Sea Salt Crostini d'Italia, and Roasted Cinnamon Maple Walnuts`,
       price: 7999,
       category: 'Special Occasions',
       imageUrl:
         'https://www.gifttree.com/images/super/5061bg_Champagne-Wishes-Gift-Basket.jpg',
-      stock: 5
+      stock: 10
     }),
     Item.create({
       name: `Treat Yo'self`,
-      description: 'Relax and self-care',
+      description:
+        'You work too hard to not treat yourself! Every one needs a break so gift yourself this basket and enjoy a nice relaxing spa treatment. This basket comes with body lotion, foot cream, moisturizing facial cleanser, shower gel, body massagers, hair brush, towel, lip balm, chapstick, and a foot scrub.',
       price: 3599,
       category: 'Self Care',
       imageUrl:
@@ -74,7 +75,8 @@ async function seed() {
     }),
     Item.create({
       name: 'Welcome Home!',
-      description: 'Housewarming',
+      description:
+        'Moving into a new house is stressful as is, so why not gift this basket to help allievate some of the stress! This uniquely shaped box comes with two coffee mugs, decadent hot chocolate and cookies. This is perfect to crack open after a long day of moving',
       price: 5599,
       category: 'Housewarming',
       imageUrl:
@@ -83,7 +85,8 @@ async function seed() {
     }),
     Item.create({
       name: 'Netflix & Chill',
-      description: 'Date night inspiration',
+      description:
+        'Are you in need of the perfect chill date night? Our Netflix & Chill basket is the perfect addition to your chill data night. This basket includes a bottle of Zinfadel, a bottle of Pinot Noir and a wide selection of savory chocolates. All that you need to add is the perfect movie!',
       price: 7599,
       category: 'Date Night',
       imageUrl:
