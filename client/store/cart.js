@@ -145,8 +145,7 @@ export const guestCheckout = (cart, total) => async dispatch => {
       '/api/users/guest/orders/guest-checkout',
       body
     )
-    console.log('receipt url', data)
-    dispatch(checkout(data))
+    dispatch(checkout())
   } catch (err) {
     console.error(err)
   }
@@ -158,8 +157,7 @@ export const userCheckout = (orderId, userId, total) => async dispatch => {
       orderId,
       total
     })
-    console.log('receipt url', data)
-    dispatch(checkout(data))
+    dispatch(checkout())
   } catch (err) {
     console.error(err)
   }
@@ -213,7 +211,11 @@ export default function(state = initialState, action) {
       }
     case REMOVE_CART_ITEM:
       const itemsToKeep = state.cart.filter(item => item.id !== action.id)
-      return {...state, cart: itemsToKeep}
+      const newQuantity = itemsToKeep.reduce(
+        (newQuant, currentItem) => newQuant + currentItem.quantity,
+        0
+      )
+      return {...state, cart: itemsToKeep, quantity: newQuantity}
     case CHECKOUT:
       return {
         ...state,
