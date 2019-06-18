@@ -18,8 +18,13 @@ const Navbar = () => (
             <Link to="/home">
               <img src="logo.jpg.png" height="100" width="100" />
             </Link>
-            <Tab label="View All" component={Link} to="/items/all" />
-            <Tab label="Special" component={Link} to="/items/specialOccasion" />
+            <Tab label="View All" component={Link} to="/items/all" value="1" />
+            <Tab
+              label="Special"
+              component={Link}
+              to="/items/specialOccasion"
+              value="1"
+            />
           </Tabs>
         </div>
         <UserNavbar />

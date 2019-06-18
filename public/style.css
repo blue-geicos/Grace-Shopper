@@ -145,6 +145,17 @@ form div {
   flex: 2;
 }
 
-/* .single-desc p {
-  text-align: left
-} */
+.error-nav {
+  text-transform: uppercase;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+.error-nav a {
+  color: lightslategrey;
+}
+
+#footer {
+  width: 100%;
+}
