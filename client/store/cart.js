@@ -5,7 +5,8 @@ import axios from 'axios'
 // initial state
 const initialState = {
   cart: [],
-  cartId: undefined
+  cartId: undefined,
+  quantity: 0
 }
 
 //Action
@@ -191,18 +192,25 @@ export default function(state = initialState, action) {
       let itemToAdd = action.item
       if (state.cart.length === 0) {
         itemToAdd.quantity = 1
-        return {...state, cart: [itemToAdd]}
+        const newQuantity = state.quantity + 1
+        return {...state, cart: [itemToAdd], quantity: newQuantity}
       } else if (state.cart.find(item => item.id === itemToAdd.id)) {
+        const newQuantity = state.quantity + 1
         let newCart = state.cart.map(item => {
           if (item.id === itemToAdd.id) {
             item.quantity++
           }
           return item
         })
-        return {...state, cart: newCart}
+        return {...state, cart: newCart, quantity: newQuantity}
       } else {
         itemToAdd.quantity = 1
-        return {...state, cart: [...state.cart, itemToAdd]}
+        const newQuantity = state.quantity + 1
+        return {
+          ...state,
+          cart: [...state.cart, itemToAdd],
+          quantity: newQuantity
+        }
       }
     case REMOVE_CART_ITEM:
       const itemsToKeep = state.cart.filter(item => item.id !== action.id)
@@ -218,21 +226,23 @@ export default function(state = initialState, action) {
     case GET_USER_CART:
       return {...state, cart: action.cart.cart, cartId: action.cart.orderId}
     case ADD_QUANTITY:
+      const increasedQuantity = state.quantity + 1
       let increasedCart = state.cart.map(item => {
         if (item.id === action.id) {
           item.quantity++
         }
         return item
       })
-      return {...state, cart: increasedCart}
+      return {...state, cart: increasedCart, quantity: increasedQuantity}
     case SUBTRACT_QUANTITY:
+      const decreasedQuantity = state.quantity - 1
       let decreasedCart = state.cart.map(item => {
         if (item.id === action.id) {
           item.quantity--
         }
         return item
       })
-      return {...state, cart: decreasedCart}
+      return {...state, cart: decreasedCart, quantity: decreasedQuantity}
     case CLEAR_CART:
       return initialState
     default:
