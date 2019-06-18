@@ -2,8 +2,6 @@ import React from 'react'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
 import TextField from '@material-ui/core/TextField'
-import {connect} from 'react-redux'
-import {addShippingInfo} from '../../store/checkout'
 
 export default function ShippingForm(props) {
   const handleFormChange = React.useCallback(evt =>
@@ -104,29 +102,3 @@ export default function ShippingForm(props) {
     </React.Fragment>
   )
 }
-
-// const mapDispatch = dispatch => ({
-//   handleSubmit: evt => {
-//     evt.preventDefault()
-//     const firstName = evt.target.firstName.value
-//     const lastName = evt.target.lastName.value
-//     const address1 = evt.target.address1.value
-//     const address2 = evt.target.address2.value
-//     const city = evt.target.city.value
-//     const zip = evt.target.zip.value
-//     const country = evt.target.country.value
-//     dispatch(
-//       addShippingInfo({
-//         firstName,
-//         lastName,
-//         address1,
-//         address2,
-//         city,
-//         zip,
-//         country
-//       })
-//     )
-//   }
-// })
-
-// export default connect(null, mapDispatch)(ShippingForm)
