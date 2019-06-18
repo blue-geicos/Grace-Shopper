@@ -22,12 +22,6 @@ class Cart extends Component {
     }
   }
 
-  handleCheckout = (cartId, userId, total) => {
-    this.props.isLoggedIn
-      ? this.props.userCheckout(cartId, userId, total)
-      : this.props.guestCheckout(this.props.cart, total)
-  }
-
   handleEditItem = (itemId, editType) => {
     const {cartId, userId, addItem, subtractItem, deleteItem} = this.props
     if (editType === 'add') {
@@ -66,7 +60,6 @@ class Cart extends Component {
             <div>
               {cart.length && (
                 <CartSummary
-                  handleCheckout={this.handleCheckout}
                   cartId={cartId}
                   userId={userId}
                   subtotal={subtotal}
@@ -92,9 +85,6 @@ const mapState = state => ({
 const mapDispatch = dispatch => ({
   deleteItem: (itemId, userId, orderId) =>
     dispatch(deleteCartItem(itemId, userId, orderId)),
-  guestCheckout: (cart, total) => dispatch(guestCheckout(cart, total)),
-  userCheckout: (cartId, userId, total) =>
-    dispatch(userCheckout(cartId, userId, total)),
   getUserCart: userId => dispatch(getUserCartThunk(userId)),
   addItem: (itemId, userId, orderId) =>
     dispatch(addItemQuantity(itemId, userId, orderId)),
