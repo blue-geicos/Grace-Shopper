@@ -218,7 +218,7 @@ export default function(state = initialState, action) {
       return {...state, cart: itemsToKeep, quantity: newQuantity}
     case CHECKOUT:
       return {
-        ...state,
+        state: initialState,
         cart: [],
         cartId: undefined
       }

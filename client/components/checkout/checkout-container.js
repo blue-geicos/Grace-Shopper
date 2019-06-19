@@ -40,7 +40,8 @@ const useStyles = makeStyles(theme => ({
     }
   },
   stepper: {
-    padding: theme.spacing(3, 0, 5)
+    padding: theme.spacing(3, 0, 5),
+    iconColor: 'lightCoral'
   },
   buttons: {
     display: 'flex',
@@ -48,7 +49,11 @@ const useStyles = makeStyles(theme => ({
   },
   button: {
     marginTop: theme.spacing(3),
-    marginLeft: theme.spacing(1)
+    marginLeft: theme.spacing(1),
+    backgroundColor: 'lightCoral'
+  },
+  stepIcon: {
+    color: 'pink'
   }
 }))
 
@@ -134,7 +139,13 @@ function Checkout({
           <Stepper activeStep={activeStep} className={classes.stepper}>
             {steps.map(label => (
               <Step key={label}>
-                <StepLabel>{label}</StepLabel>
+                <StepLabel
+                  StepIconProps={{
+                    classes: {root: classes.stepIcon}
+                  }}
+                >
+                  {label}
+                </StepLabel>
               </Step>
             ))}
           </Stepper>
@@ -161,7 +172,7 @@ function Checkout({
                   )}
                   <Button
                     variant="contained"
-                    color="primary"
+                    color="lightCoral"
                     onClick={handleNext}
                     className={classes.button}
                   >
