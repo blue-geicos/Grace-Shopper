@@ -201,3 +201,7 @@ h3 a:hover {
 #footer {
   width: 100%;
 }
+
+.step {
+  color: lightcoral;
+}

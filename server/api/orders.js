@@ -8,7 +8,7 @@ router.put('/checkout', async (req, res, next) => {
   try {
     const orderToUpdate = await Order.findByPk(req.body.orderId)
     const amount = req.body.total
-    console.log('orderToUpdate', orderToUpdate)
+
     stripe.charges.create(
       {
         amount: amount,

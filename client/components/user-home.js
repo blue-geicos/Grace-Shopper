@@ -27,7 +27,7 @@ export const UserHome = () => {
       <div className="aboutUs">
         <h1>About Us</h1>
         <p>
-          From Me To You, is a convienent unique way to show someone how much
+          From Me To You, is a convenient unique way to show someone how much
           you care! We have a package for every occasion. All packages are made
           to order and shipped with love.
         </p>
